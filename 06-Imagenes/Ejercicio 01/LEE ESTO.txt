@@ -1,0 +1,3 @@
+Activar en PHP 8:
+
+extension=gd

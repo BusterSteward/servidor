@@ -1,0 +1,10 @@
+CREATE DATABASE  IF NOT EXISTS examen_2;
+USE examen_2;
+
+DROP TABLE IF EXISTS fichero;
+CREATE TABLE fichero (
+  id int(3) 		NOT NULL AUTO_INCREMENT,
+  LINEA 			varchar(200) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+

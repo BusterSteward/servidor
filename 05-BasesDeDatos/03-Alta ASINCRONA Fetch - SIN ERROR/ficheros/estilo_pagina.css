@@ -1,0 +1,171 @@
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+body
+{
+	  display: flex;
+	  flex-direction: column;
+	  margin: 0;
+	  min-height: 100vh;
+}
+
+.contenedor1
+{
+	display: flex;
+	border-style: solid;
+	border-width: 2px;
+	border-color: navy;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	flex: 1;
+	/* eje horizontal - x */
+	justify-content: center;
+}
+
+.contenedor2
+{
+	display: flex;
+	  /* comportamiento de bloque */
+	 flex-direction: column;	
+	border-style: solid;
+	border-width: 2px;
+	border-color: red;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	/* sólo estamos aplicando "flex-grow" */
+	flex: 1;
+	/* eje horizontal - x */
+	justify-content: center;
+	/* eje vertical - y */
+	align-items: center;	
+	margin: 15px;
+}
+
+.contenedor3
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color: blue;
+	margin: 10px;
+	padding: 15px;
+	font-family: sans-serif;
+}
+
+.contenedor4
+{
+	display: flex;
+	/* eje horizontal - x */
+	justify-content: center;	
+	/* eje vertical - y */
+	align-items: center;	
+	
+	border-style: solid;
+	border-width: 0px;
+	border-color: orange;
+	font-family: sans-serif;
+	/* sólo estamos aplicando "flex-grow" */
+	flex: 1;
+}
+
+.contenedor5
+{
+	display: flex;
+	/* eje horizontal - x */
+	justify-content: center;	
+	/* eje vertical - y */
+	align-items: center;	
+	
+	border-style: solid;
+	border-width: 0px;
+	border-color: green;
+	font-family: sans-serif;
+	/* sólo estamos aplicando "flex-grow" */
+	flex: 3;	
+}
+
+.contenedor6
+{
+	display: flex;
+	/* eje horizontal - x */
+	justify-content: center;	
+	/* eje vertical - y */
+	align-items: center;	
+	
+	border-style: solid;
+	border-width: 0px;
+	border-color: blue;
+	font-family: sans-serif;
+	/* sólo estamos aplicando "flex-grow" */
+	flex: 1;	
+}
+
+.footer
+{
+	display: flex;
+	/* factor de contracción */
+	/* flex-shrink:0; */
+	background-color: DodgerBlue;
+	/* border-width: 1px; */
+	/* border-color: blue; */
+	height: 60px;
+	/* eje vertical - y */
+	align-items: center;
+	/* eje horizontal - x */
+	justify-content: center;	
+	color: white;
+	font-size: 16px;
+	font-family: sans-serif;
+}
+
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+@media (max-width: 1000px)
+{
+	
+.contenedor4
+{
+	margin-bottom: 15px;
+}
+
+.contenedor6
+{
+	margin-top: 15px;
+}
+
+}
+
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+@media only screen and (max-width: 780px)
+{
+
+.contenedor2
+{
+	flex-direction: column;
+}
+		
+.contenedor3
+{
+	/*width:70%;*/
+	/*display: inline;*/
+}
+
+.contenedor5
+{
+	 flex-direction: column;	
+	 padding:10px;
+}
+
+.contenedor6
+{
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
+.contenedor7
+{
+	 margin-bottom: 15px;
+}

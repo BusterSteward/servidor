@@ -1,0 +1,13 @@
+CREATE DATABASE  IF NOT EXISTS EjercicioExamen03;
+USE EjercicioExamen03;
+
+DROP TABLE IF EXISTS usuarios;
+CREATE TABLE usuarios
+(
+  CODIGO 	int(11) NOT NULL,
+  NOMBRE varchar(10) NOT NULL,
+  EDAD 		int(3) NOT NULL,
+  IMAGEN 	longblob NOT NULL,
+  
+  PRIMARY KEY (CODIGO)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

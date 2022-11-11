@@ -1,0 +1,109 @@
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+.paginacion a
+{
+	/* posicionamiento elementos */
+	display:inline-block;
+	/* espacio entre elementos */
+	margin-right:0px;
+	/* márgenes interior botones */ 
+	padding:7px 10px;
+	
+	border-style: solid;
+	border-width: 1px;
+	border-color: blue;
+	
+	color:blue;
+	background:#FF;
+	/* vínculo sin subrayar */
+	text-decoration: none;
+	font-size: 17px;
+	font-family: sans-serif;	
+}
+
+.paginacion a.active
+{
+	/* azul claro */
+	background-color: #A9E2F3; 
+	color: black;
+}
+
+.paginacion a.disabled 
+{
+	/* gris claro */
+	color: #BDBDBD;
+}
+
+.marcador
+{
+	/* espacio entre elementos */
+	margin-left:4px;
+	width:20px;
+	/* márgenes interior botones */ 
+	padding:7px 10px;
+	/* solo lectura */
+	pointer-events: none;
+	
+	color:white;
+	font-family: arial;
+	font-size: 16px;
+	font-weight: bold;
+	
+	border-style: solid;
+	border-width: 1px;
+	border-color: blue;
+	
+	background-color:navy;
+}
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+@media (max-width: 1000px)
+{
+	
+.paginacion a
+{
+	/* márgenes interior botones */ 
+	padding:7px 7px;
+	font-size: 14px;
+}
+
+.marcador
+{
+	margin-left:0px;
+	width:16px;
+	/* márgenes interior botones */ 
+	padding:7px 9px;
+	/* solo lectura */
+	pointer-events: none;
+	font-size: 12px;
+}
+}
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+@media only screen and (max-width: 780px)
+{
+
+.paginacion a
+{
+	/* márgenes interior botones */ 
+	padding:5px 5px;
+	font-size: 12px;
+}
+
+.marcador
+{
+	margin-left:0px;
+	width:12px;
+	/* márgenes interior botones */ 
+	padding:8px 5px;
+	/* solo lectura */
+	pointer-events: none;
+	font-size: 10px;
+}
+}

@@ -1,0 +1,13 @@
+{
+  "name": "pruebas",
+  "version": "1.0.0",
+  "description": "pruebas de node",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
+    "start": "node src/index.js"
+  },
+  "author": "andres hernandez parra",
+  "license": "ISC"
+}

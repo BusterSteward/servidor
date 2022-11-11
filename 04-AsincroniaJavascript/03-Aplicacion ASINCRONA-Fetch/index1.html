@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<meta http-equiv="Pragma" content="no-cache">
+		 
+		<meta name="description" content="Estudio Ajax JavaScript">
+		<meta name="author" content="Jorge López">
+
+		<link rel="shortcut icon" href="imagenes/icon.png"/>
+
+		<title>Ajax</title>
+
+		<!-- estilo general de la página -->
+		<link href="ficheros/estilo_pagina.css" rel="stylesheet">
+		
+		<!-- estilo barra de menú -->
+		<link href="ficheros/barra_menu.css" rel="stylesheet">		
+		
+		<!-- biblioteca de iconos -->
+		<link href="ficheros/all.css" rel="stylesheet">
+</head>
+
+
+<script type="text/javascript">
+
+// FETCH
+// ES el API de Javascript para las comunicaciones "asíncronas" basado en "promesas"
+// Es la manera más sencilla y práctica de hacer AJAX con código nativo en el navegador
+
+// No utilizaremos API´s de terceros
+
+// El método "fetch()" depende directamente del objeto window del navegador
+// Su uso más simple consiste en pasarle una URL, cuyo contenido lo recibirá el "cliente web" de manera "asíncrona"
+
+// "fetch()" basa su trabajo en promesas ES6, por lo que nos devolverá una promesa
+// que podemos tratar tal y como estamos acostumbrados a hacer, con el "then" y el "catch"
+
+// Es muy importante mencionar que fetch(), así como en general todo el trabajo con Ajax,
+// se implementa mediante el protocolo HTTP
+// echa un vistazo al documento -> "Protocolo TCP-IP.pdf"
+
+// Hay que tener muy claro ¿Qué es un objeto "response"?:
+
+	// Cuando un CLIENTE solicita un recurso al SERVIDOR->
+	// El SERVIDOR envía una "respuesta HTTP" al CLIENTE-> "response" -> a través de una promesa:
+	//	El objetivo de la respuesta es:
+			// -- proporcionar al cliente el recurso que solicitó
+			// -- o informar al cliente que se ha realizado la acción solicitada
+			// -- o bien para informar al cliente que ocurrió un error en el procesamiento de su solicitud
+
+// Códigos HTTP response:
+// el siguiente enlace es para ver los valores de las propiedades de "response"
+// https://developer.mozilla.org/es/docs/Web/API/Fetch_API/Using_Fetch
+// https://developer.mozilla.org/en-US/docs/Web/HTTP/Status
+
+// info uso FECTH
+// https://desarrolloweb.com/articulos/fetch-ajax-javascript.html
+// https://www.todojs.com/api-fetch-el-nuevo-estandar-que-permite-hacer-llamadas-http/#:~:text=Una%20de%20las%20caracter%C3%ADsticas%20m%C3%A1s,o%20se%20produzca%20un%20error.
+
+function llamo_a_script_1()
+{
+		document.getElementById('estrella4').style.visibility='visible';
+		document.getElementById("aviso4").innerHTML="";
+		document.getElementById("b4").disabled=true;
+		// prueba con una "url" que no exista para comprobar el funcionamiento del ".catch"
+		var url = "laprueba.php";
+
+		// "parámetros" fetch y métodos "response"
+		fetch(url)
+		.then(function(response)
+		{
+			if (response.ok)
+			{
+				// recibimos una promesa que nos devuelve un objeto "response"
+				// lo primero que tenemos que hacer:
+				// a través del objeto "response" comprobaremos si la respuesta es "ok"
+				// PROPIEDADES "objeto response"
+				// response.ok -> true/false
+				// response.statusText -> OK/NOTFOUND
+				// response.status -> 200/404
+				alert("La respuesta del servidor es: "+response.ok+" "+response.statusText+" "+response.status);
+				// utilizamos un método del objeto "response" -> "response.text()"
+				// que a través de otra promesa nos devuelve el texto que devuelve el servidor
+				// si en vez de texto plano el servidor devolviese datos en formato JSON deberíamos usar "response.json()"
+				// MÉTODO "objeto response"-> response.text()
+				return response.text();
+			}
+			else	
+				// generamos un error que será recogido por el método ".catch"
+				throw new Error('La página no existe!! : '+' '+response.ok+' '+response.statusText+"  "+response.status);			
+		})
+		.then(function(datos)
+		{
+			oculto_estrella(4);
+			document.getElementById("b4").disabled=false;
+			alert(datos);
+			document.getElementById("aviso4").innerHTML=datos;
+		})
+		.catch(function(err)
+		{
+			oculto_estrella(4);
+			document.getElementById("b4").disabled=false;
+			alert(err);
+		});
+}
+
+function llamo_a_script(numero)
+{
+	document.getElementById('estrella'+numero).style.visibility='visible';
+	document.getElementById("aviso"+numero).innerHTML="";
+	document.getElementById("b"+numero).disabled=true;
+	
+	// FETCH nativo JavaScript
+	// al script PHP le pasamos un valor
+	// var url = "prueba2"+numero+".php?VALOR="+numero;
+	 var url = "prueba"+numero+".php?VALOR="+numero;
+	 
+	fetch(url)
+	.then(function(response)
+	{
+		if (response.ok)
+		{
+			//alert(response.ok);
+			return response.text();
+		}	
+		else	
+			// generamos un error que será recogido por el método ".catch"
+			throw new Error('Problema con la página!! : '+response.statusText);
+	})
+	.then(function(datos)
+	{
+		document.getElementById("aviso"+numero).innerHTML=datos;
+		oculto_estrella(numero);
+	})
+	.catch(function(err)
+	{
+		//alert(err);
+		document.getElementById("aviso"+numero).innerHTML=err;
+		oculto_estrella(numero);
+	});
+	// IMPORTANTE
+	// OJO!!!!
+	// si aquí hubiese MÁS código que ejecutar
+	// se seguiría ejecutando independientemente de si el script PHP se ha ejecutado o no
+	// OJO!!!!	
+	// IMPORTANTE
+	
+}
+
+
+
+function oculto_estrella(numero)
+{
+	document.getElementById('estrella'+numero).style.visibility='hidden';
+	document.getElementById("b"+numero).disabled=false;
+}
+
+
+</script>
+
+<body onload="">
+<!-- **************************** CABECERA ************************************************ -->
+<!-- **************************** CABECERA ************************************************ -->
+<!-- **************************** CABECERA ************************************************ -->
+<header>
+
+<div class="BarraNavegar">
+				<i class="fas fa-tv fa-2x" ></i>
+				<label  class="L1">Servidor 2º DAW&nbsp&nbsp&nbsp</label>		
+				<label  class="L2">Ejemplo de Aplicación:</label>		
+				<label  class="L3"><b>ASÍNCRONA</b> Fetch JavaScript</label>	
+	
+</div>
+</header>
+<!-- **************************** CUERPO ************************************************ -->
+<!-- **************************** CUERPO ************************************************ -->
+<!-- **************************** CUERPO ************************************************ -->
+<div class="contenedor1">
+<div id="cajapagina" class="contenedor2">
+
+		<div id="" class="contenedor3">
+				<div id="aviso1" name="aviso1"  scrolling ="no" marginheight="10" marginwidth="1" 
+					style="border: 1px solid red; width:140px; height:120px;">
+				</div>	
+				<div>
+					<img  id="cajafoto1" src="imagenes/muneco.gif"  height="45" width="40" style="visibility:visible;"/>
+					<img  id="estrella1" src="imagenes/estrella.gif"  height="40" width="40" style="visibility:hidden;border: 1px solid black"/>
+				</div>				
+				<input class="botones" type = "button" id="b1" value = "Llamo a script-1 PHP" style="cursor:pointer;" onclick = "llamo_a_script('1')">
+		</div>		
+
+		<div id="" class="contenedor3">
+				<div id="aviso2" name="aviso2"  scrolling ="no" marginheight="10" marginwidth="1" 
+					style="border: 1px solid red; width:140px; height:120px;">
+				</div>			
+				<div>
+					<img  id="cajafoto2" src="imagenes/muneco.gif"  height="45" width="40" style="visibility:visible;"/>
+					<img  id="estrella2" src="imagenes/estrella.gif"  height="40" width="40" style="visibility:hidden;border: 1px solid black"/>
+				</div>				
+				<input class="botones" type = "button" id="b2" value = "Llamo a script-2 PHP" style="cursor:pointer;" onclick = "llamo_a_script('2')">
+		</div>		
+		
+		<div id="" class="contenedor3">
+				<div id="aviso3" name="aviso3"  scrolling ="no" marginheight="10" marginwidth="1" 
+					style="border: 1px solid red; width:140px; height:120px;">
+				</div>			
+				<div>
+					<img  id="cajafoto3" src="imagenes/muneco.gif"  height="45" width="40" style="visibility:visible;"/>
+					<img  id="estrella3" src="imagenes/estrella.gif"  height="40" width="40" style="visibility:hidden;border: 1px solid black"/>
+				</div>				
+				<input class="botones" type = "button" id="b3" value = "Llamo a script-3 PHP" style="cursor:pointer;" onclick = "llamo_a_script('3')">
+		</div>		
+		
+		<div id="" class="contenedor3">
+				<div id="aviso4" name="aviso4"  scrolling ="no" marginheight="10" marginwidth="1" 
+					style="border: 1px solid red; width:140px; height:120px;">
+				</div>			
+				<div>
+					<img  id="cajafoto4" src="imagenes/muneco.gif"  height="45" width="40" style="visibility:visible;"/>
+					<img  id="estrella4" src="imagenes/estrella.gif"  height="40" width="40" style="visibility:hidden;border: 1px solid black"/>
+				</div>				
+				<input class="botones" type = "button" id="b4" value = "Llamo a PRUEBA" style="cursor:pointer;" onclick = "llamo_a_script_1()">
+		</div>				
+</div>
+
+</div>
+<!-- **************************** FOOTER ************************************************ -->
+<!-- **************************** FOOTER ************************************************ -->
+<!-- **************************** FOOTER ************************************************ -->
+<footer class="footer">
+		<img  id="estrella" src="imagenes/estrella.gif"  height="40" width="40" style="visibility:hidden;"/>
+		&nbsp&nbsp<i class="fas fa-building fa-2x" ></i>
+		<label>&nbsp © 2022 IES Escultor</label>		
+</footer>
+
+</body>
+</html>

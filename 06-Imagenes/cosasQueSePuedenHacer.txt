@@ -1,0 +1,5 @@
+1- Subir imagenes a la base de datos a traves de un objeto file en el cliente
+
+2- Subir imagenes físicas directamente a la base de datos desde el servidor
+
+3- Crear imagenes físicas en el servidor a traves de imagenes almacenadas en la base de datos

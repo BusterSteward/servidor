@@ -1,0 +1,213 @@
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+body
+{
+	  display: flex;
+	  flex-direction: column;
+	  margin: 0;
+	  min-height: 100vh;
+}
+
+
+.contenedor1
+{
+	display: flex;
+	border-style: solid;
+	border-width: 2px;
+	border-color: navy;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	flex: 1;
+	/* eje horizontal - x */
+	justify-content: center;
+}
+
+.contenedor2
+{
+	display: flex;
+	  /* comportamiento de bloque */
+	 flex-direction: column;		
+	border-style: solid;
+	border-width: 2px;
+	border-color: red;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	flex: 1;
+	/* eje horizontal - x */
+	justify-content: center;
+	/* eje vertical - y */
+	align-items: center;	
+	margin: 15px;
+}
+
+.contenedor3
+{
+	border-style: solid;
+	border-width: 0px;
+	border-color: blue;
+	/* eje horizontal - x */
+	/*justify-content: start;*/
+	/* eje vertical - y */
+	/*align-items: start;*/
+	
+	/* anula alineación vertical especificada en .contenedor2 */
+	/* se alinea verticalmente arriba */
+	align-self: flex-start;
+	
+	/* para que pueda crecer */
+	flex-Grow: 0;
+	
+	font-family: sans-serif;
+	
+	width:100%;
+}
+
+.contenedor4
+{
+	display: flex;
+	/* eje horizontal - x */
+	justify-content: center;	
+	/* eje vertical - y */
+	align-items: start;	
+	
+	border-style: solid;
+	border-width: 0px;
+	border-color: orange;
+	font-family: sans-serif;
+	/* sólo estamos aplicando "flex-grow" */
+	flex: 5;
+	width:100%;
+}
+
+.contenedor5
+{
+	display: flex;
+	/* eje horizontal - x */
+	justify-content: center;	
+	/* eje vertical - y */
+	align-items: center;	
+	
+	border-style: solid;
+	border-width: 0px;
+	border-color: green;
+	font-family: sans-serif;
+	/* sólo estamos aplicando "flex-grow" */
+	flex: 1;	
+	width:100%;
+}
+
+.contenedor6
+{
+	display: flex;
+	/* eje horizontal - x */
+	justify-content: center;	
+	/* eje vertical - y */
+	align-items: center;	
+	
+	border-style: solid;
+	border-width: 0px;
+	border-color: blue;
+	font-family: sans-serif;
+	/* sólo estamos aplicando "flex-grow" */
+	flex: 1;	
+}
+
+.caja_mensaje
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color: blue;
+	  /* redondeado */
+	border-radius: 6px;
+	padding:7px;
+	/* solo lectura */
+	pointer-events: none;
+	width: 35px;	
+	color:green;
+	font-family: arial;
+	font-size: 16px;
+	font-weight: bold;	
+	text-align:center;
+}
+
+.footer
+{
+	display: flex;
+	/* factor de contracción */
+	/* flex-shrink:0; */
+	background-color: DodgerBlue;
+	/* border-width: 1px; */
+	/* border-color: blue; */
+	height: 60px;
+	/* eje vertical - y */
+	align-items: center;
+	/* eje horizontal - x */
+	justify-content: center;	
+	color: white;
+	font-size: 16px;
+	font-family: sans-serif;
+}
+
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+@media (max-width: 1000px)
+{
+
+#mensaje_label
+{
+	margin-bottom:10px;
+	margin-left:10px;
+}
+
+}
+
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+@media only screen and (max-width: 780px)
+{
+
+.contenedor2
+{
+	flex-direction: column;
+}
+
+.contenedor3
+{
+	width:100%;
+}
+
+.label
+{
+	margin-left:10px;
+}	
+
+#boton1,#boton1,#criterio1, #criterio2,#caja_mensaje,#nif,#L1
+{
+	display: block;
+}
+
+#criterio1,#criterio2
+{
+	margin-bottom:10px;
+}
+
+#criterio1,#criterio2,#mensaje_label
+{
+	margin-left:10px;
+}
+
+#nif,#L1
+{
+	margin-left:5px;
+}
+
+#datos
+{
+	margin-left:0px;
+	padding-left:0px;
+}
+}

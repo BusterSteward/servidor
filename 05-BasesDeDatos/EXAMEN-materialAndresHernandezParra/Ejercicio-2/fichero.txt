@@ -1,0 +1,9 @@
+40 silla
+45 mesa
+10 papel
+03 teclado
+12 altavoz
+30 monitor
+02 lapicero
+23 impresora
+01 pizarra

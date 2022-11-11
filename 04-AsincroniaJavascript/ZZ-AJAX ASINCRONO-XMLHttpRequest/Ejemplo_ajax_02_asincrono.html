@@ -1,0 +1,106 @@
+<HTML>
+<HEAD>
+<TITLE>Ejemplo AJAX nº02:</TITLE>
+</HEAD>
+
+<script language='javascript' src="ParaCrearObjetoAJAX.js"></script> 
+<script language = "javascript">
+
+var ObjetoAjax = false;
+//1-creamos el objeto AJAX
+ObjetoAjax = CreoObjetoAjax();
+
+//*********************************************************************************************
+function estadoinicial()
+{
+	document.getElementById('estado').innerHTML = "Objeto AJAX sin Iniciar...";
+}
+ //*********************************************************************************************
+function pedirDatos(fuenteDatos, destino)
+{
+
+	// lo primero que comprobamos es que el objeto AJAX haya sido creado
+    if(ObjetoAjax)
+	{
+		 
+		 // visualizo estrella
+		 document.getElementById('estrella').style.visibility="visible";
+		 
+		 // puntero al DIV destino
+		 var obj = document.getElementById(destino);
+		  
+		 // aquí en este punto el valor de ObjetoAjax.readyState es 0
+		 // corresponde al estado "sin iniciar"	  
+		  
+		 //2-inicializamos el objeto AJAX
+		 
+		 //Preparamos-Configuramos los datos para la comunicación con el Server
+		 // a open le pasamos:
+		 //el método de comunicación: GET o POST (en este ejemplo da igual GET o POST)
+		 //la fuente de los datos: (script PHP a ejecutar) (espera.php)
+		 //si la comunicación es síncrona(false) o asíncrona(true)
+		 ObjetoAjax.open("GET", fuenteDatos, true);
+
+		 // aquí en este punto el valor de OBJETO.readyState es 1
+		 // corresponde al estado "cargando"
+
+		 //3-definimos la función que se ejecutará cada vez que el objeto AJAX cambie de estado
+		 
+		 ObjetoAjax.onreadystatechange = function ()
+		 //esta función se podría crear aparte y ponerle un nombre propio 
+		 //lo hacemos así porque en la mayoría de la bibliografia AJAX aparece así
+		 {
+				 if (ObjetoAjax.readyState == 4 && ObjetoAjax.status == 200)
+				 //status - (200 es el valor para una conexión exitosa)
+		         //status - (404 página o script inexistente)
+		         //esta propiedad (status) de solo lectura esta disponible cuando readyState toma los valores 3 o 4
+				 {
+				   // en ObjetoAjax.responseText tengo almacenados los datos que me devuelve el script PHP
+				  //  solo tiene sentido utilizar ObjetoAjax.responseText cuando el estado del objeto AJAX es 4
+				   obj.innerHTML = ObjetoAjax.responseText;
+				   document.getElementById('estado').innerHTML = "Completado";
+				   
+				   	// oculto la estrella
+					document.getElementById('estrella').style.visibility="hidden";
+				 }
+		  }
+		  
+		 //4-ejecutamos el objeto AJAX
+		 //Iniciamos la comunicación con el server
+		 //entre paréntesis pondremos todos los datos necesarios para la ejecución del script en PHP
+		 //en este caso no enviamos ningún parámetro
+		 ObjetoAjax.send(null);
+    } 
+}
+//*********************************************************************************************
+</script>
+
+<BODY onload="estadoinicial()">
+
+		<div id="cuadrado contenedor"
+				style="border:2px solid #04B404;width:800px;height:470px;padding-left:30px;position:absolute;
+							top:50%;margin-top:-310px;left:50%;margin-left:-400px">
+			
+			<h2>Mostrando datos con AJAX (comunicación asíncrona):</h2>
+			<form>
+					<!-- a pedirDatos le pasamos: (el script PHP que recupera los datos que quiero) y (el sitio donde los quiero almacenar) -->
+					<input type = "button" value = "Mostrar mensaje" style="cursor:pointer;position:absolute;top:100px;left:30px" onclick = "pedirDatos('espera.php','info')">
+			</form>	
+			
+			<!--No se produce bloqueo con este botón -->
+			<input type="button" id="B2" name="B2" style="cursor:pointer" value="Hola"
+			onClick="alert('Hola como estás');">				
+			
+			<div id="estrella" style="visibility:hidden;width:40;height:40px;position:absolute;top:130px;left:30px;border:1px solid black;background-image: url(estrella.gif)"> </div>			
+			
+			<div id="cajafoto1" style="position:absolute;top:200px;left:50px;width:83; height:93px;border:1px solid black;background-image: url(muneco.gif)";> </div>
+			<div id="cajafoto2" style="position:absolute;top:200px;left:200px;width:83; height:93px;border:1px solid black;background-image: url(muneco.gif)";> </div>
+			<div id="cajafoto3" style="position:absolute;top:200px;left:350px;width:83; height:93px;border:1px solid black;background-image: url(muneco.gif)";> </div>
+		
+			<div id="estado" style="position:absolute;top:350px;width:300px;background-color:#58FAF4;">Estado:</div>
+
+			<div id="info" style="position:absolute;top:400px;width:700px;background-color:#99FF66;">Aquí aparecerá la información solicitada:</div>
+			
+		</div>
+</BODY>
+</HTML>

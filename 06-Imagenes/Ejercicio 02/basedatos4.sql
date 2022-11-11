@@ -1,0 +1,10 @@
+CREATE DATABASE  IF NOT EXISTS basedatos4;
+USE basedatos4;
+
+DROP TABLE IF EXISTS imagenes;
+CREATE TABLE imagenes (
+  ID int(3) NOT NULL AUTO_INCREMENT,
+  IMAGEN longblob,
+  PRIMARY KEY (ID)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
