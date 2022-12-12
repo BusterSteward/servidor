@@ -4,10 +4,21 @@
   "description": "pruebas de node",
   "main": "index.js",
   "scripts": {
-    "test": "test",
+    "test": "echo ERROR: no hay test implementados en este proyecto",
     "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs",
-    "start": "node src/index.js"
+    "start": "node src/index.js",
+    "start2": "node src/index2.js"
   },
   "author": "andres hernandez parra",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "babel": "^6.23.0",
+    "babel-preset-env": "^1.7.0",
+    "babel-register": "^6.26.0"
+  },
+  "dependencies": {
+    "mysql": "^2.18.1",
+    "mysql2": "^2.3.3",
+    "sequelize": "^6.25.5"
+  }
 }

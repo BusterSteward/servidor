@@ -1,0 +1,116 @@
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+
+.BarraNavegar
+{
+	display: flex;
+	/* márgenes interiores de la barra de navegación */
+	padding: 10px;
+	font-size: 20px;
+	color: white;	
+	background-color: DodgerBlue;
+	font-family: calibri;
+	align-items: flex-end;
+}
+  
+.Opcion_menu
+{
+	padding-right: 30px;
+}
+
+.L1
+{
+	font-size: 22px;
+	font-family:Calibri;
+	color:white;
+	padding-left: 10px;
+	padding-right: 10px;
+	/*align-self: flex-end;*/
+}
+
+.L2
+{
+	font-size: 20px;
+	font-family:Calibri;
+	color:aqua;
+	padding-left: 10px;
+	/*align-self: flex-end;*/
+}
+
+.L3
+{
+	font-size: 18px;
+	font-family:Calibri;
+	color:MistyRose;
+	padding-left: 10px;
+}
+
+.L4
+{
+	font-size: 18px;
+	font-family:Calibri;
+	color:lime;
+	padding-left: 10px;
+}
+
+.botones
+{
+	width:140px;
+	height:50px;
+}
+
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+@media (max-width: 1000px)
+{
+	
+.BarraNavegar
+{
+	flex-direction: column;
+	/* eje vertical - y */
+	align-items: center;
+}
+	
+.L1
+{
+	font-size: 20px;
+}
+.L2,.L3,.L4
+{
+	font-size: 17px;
+}
+
+}
+
+
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+@media only screen and (max-width: 780px)
+{
+
+.BarraNavegar
+{
+	flex-direction: column;
+	/* eje vertical - y */
+	align-items: center;
+}
+ 
+.L1
+{
+	font-size: 18px;
+}
+
+.L2,.L3,.L4
+{
+	font-size: 16px;
+}
+
+}
+
+}

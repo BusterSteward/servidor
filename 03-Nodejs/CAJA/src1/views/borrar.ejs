@@ -1,0 +1,41 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+
+<body onload="document.getElementById('id').focus();">
+	<%- include('02-HEADER-BORRAR'); %> 
+
+	<div class="contenedor1">
+	<div id="cajapagina" class="contenedor2">
+ 				<!-- este formulario apunta a una ruta del servidor-->
+				<!-- /consulta pero con el método POST-->
+				
+				<div class="contenedor-formulario">
+				<form id="formulario1" action="/borrar" method="post" autocomplete="off"> 
+				<legend class="leyenda">Baja de Cliente: </legend><br>
+						<div class="form-group">
+							<label>Id Cliente:</label>
+							<input class="input-control" type="number" id="id" name="id" min="1" max="150" style="width:15%" required autocomplete="off">
+						</div><br><br><br>
+						
+						<button class="boton" id="boton1" type="reset" form="formulario1"
+						onclick="document.getElementById('id').focus();">
+						<i class="fa fa-trash"></i> Limpiar
+						</button>
+		
+						<button class="boton" id="boton2" type="submit" form="formulario1"
+						onclick="">
+						<i class="fa fa-home"></i> Borrar
+						</button>					
+						
+						<button class="boton" id="boton3" type="button"
+						onclick="location.href=('/');">
+						<i class="fas fa-window-close"></i> Cancelar
+						</button>										
+				</form>
+				</div>
+	</div>
+	</div>
+	<%- include('03-FOOTER'); %> 
+</body>
+</html>

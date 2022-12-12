@@ -1,0 +1,4 @@
+// body-parser analiza los datos codificados enviados utilizando la solicitud HTTP POST
+//extended: false" -> forma en la que se organizan los datos para su acceso
+// https://apuntes.de/nodejs-desarrollo-web/body-parser/#gsc.tab=0
+app.use(bodyParser.urlencoded({extended: false}));

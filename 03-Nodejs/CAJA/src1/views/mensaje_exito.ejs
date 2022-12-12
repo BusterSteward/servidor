@@ -1,0 +1,26 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+<body onload="document.getElementById('id').focus();">
+	<%- include('02-HEADER-EXITO'); %> 
+
+	<div class="contenedor1">
+	<div id="cajapagina" class="contenedor2">
+  
+ 			<div class="contenedor-formulario">
+				<img src="imagenes/usuario.png" width="80" height="94"><br><br>
+                
+				<h3 style="color:green">Éxito: baja</h3>
+				<h3 style="color:green">Éxito: id=<%= id %></h3>
+				<h4>Cliente borrado correctamente</h4><br><br>
+
+				<button class="boton" id="boton3" type="button"
+				onclick="location.href=('/<%= titulo2 %>');">
+				<i class="fas fa-window-close"></i> Volver
+				</button><br><br>			
+			</div>
+	</div>
+	</div>
+	<%- include('03-FOOTER'); %> 
+</body>
+</html>

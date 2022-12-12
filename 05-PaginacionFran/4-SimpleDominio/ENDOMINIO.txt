@@ -1,0 +1,2 @@
+como esta version es la que se ha subido al dominio
+he cambiado la conexion y el script

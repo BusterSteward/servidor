@@ -1,0 +1,49 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+<body onload="document.getElementById('id').focus();">
+	<%- include('02-HEADER-CONSULTA.ejs'); %> 
+
+	<div class="contenedor1">
+	<div id="cajapagina" class="contenedor2">
+            
+			<div class="contenedor-formulario">
+ 
+			<div class="form-group">
+				<label>Id Cliente:</label>
+				<input class="input-control" id="id" name="id" readonly value="<%= datos[0].id %>" style="width: 15%">
+			</div>
+
+			<div class="form-group">
+				<label>Nombre:</label>
+				<input class="input-control" id="nombre" name="nombre" readonly value="<%= datos[0].nombre %>" style="width: 60%">
+			</div>
+
+			<div class="form-group">
+				<label>Provincia:</label>
+				<input class="input-control" id="provincia" name="provincia" readonly value="<%= datos[0].provincia %>" style="width: 60%">
+			</div>
+
+			<div class="form-group">
+				<label>Edad:</label>
+				<input class="input-control" id="edad" name="edad" readonly value="<%= datos[0].edad %>" style="width: 20%">
+			</div>
+
+			<div class="form-group">
+				<label>Fecha Alta:</label>
+				<input class="input-control" id="fecha" name="fecha" readonly style="width: 40%"
+				value="<%= datos[0].fecha.getDate()+'-'+(datos[0].fecha.getMonth()+1)+'-'+datos[0].fecha.getFullYear() %>"> 
+			</div><br>
+
+			<button class="boton" id="boton3" type="button"
+			onclick="location.href=('/consulta');">
+			<i class="fas fa-window-close"></i> Volver
+			</button><br><br>			
+			</div>
+	</div>
+	</div>
+	<%- include('03-FOOTER'); %> 
+</body>
+</html>
+
+
