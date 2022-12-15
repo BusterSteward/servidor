@@ -1,0 +1,47 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+<body>
+	<%- include('02-HEADER-listado'); %> 
+
+	<div class="contenedor1">
+			<div id="cajapagina" class="contenedor2">
+
+					<!-- recibimos una variable llamada "datos"-->
+					<table class='table' style='border:0px solid red'>
+							<thead><tr>
+							<th>ID</th>
+							<th>Imagen</th>
+							<th>Nombre:</th>
+							<th>Provincia</th>
+							<th>Edad</th>
+							<th>Fecha</th>
+							<th>Acciones</th>
+							</tr></thead>
+					   
+							<tbody>
+							<% for (var i = 0; i < datos.length; i ++) { %>
+								<tr>
+								<td><%= datos[i].id %></td>
+								<td><img src="data:image/jpeg;base64,<%= datos[i].imagen.toString('base64') %>" width="50" height="50"></td>
+								<td><%= datos[i].nombre %></td>
+								<td><%= datos[i].provincia %></td>
+								<td><%= datos[i].edad %></td>
+								<td><%= ("0"+datos[i].fecha.getDate()).substr(-2,2)+"-"+
+										  ("0"+(datos[i].fecha.getMonth()+1)).substr(-2,2)+"-"+datos[i].fecha.getFullYear() %></td>
+								<td> 
+									<button class="boton2" type="button" onclick="location.href=('/modificacion2/<%= datos[i].id %>');">
+									<i class="fas fa-pencil-alt"></i> Modificar </button>				
+										
+									<button class="boton" type="button" onclick="location.href=('/baja/<%= datos[i].id %>');">
+									<i class="fas fa-trash-alt"></i> Borrar </button>			
+								</td>
+								</tr>
+								<% } %>
+								</tbody>
+					</table>
+	</div>
+	</div>
+	<%- include('03-FOOTER'); %> 
+</body>
+</html>

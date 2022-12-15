@@ -1,0 +1,121 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+
+<body onload="pongofecha()">
+	<%- include('02-HEADER-alta'); %> 
+
+	<div class="contenedor1">
+	<div id="cajapagina" class="contenedor2">
+ 				<!-- este formulario apunta a una ruta del servidor-->
+				<!-- /alta pero con el método POST-->
+				
+				<div class="contenedor-formulario">
+				<form id="formulario1" action="/alta" method="post" autocomplete="off" enctype="multipart/form-data"> 
+				<legend class="leyenda">Alta de Cliente: </legend><br>
+						<div class="form-group">
+							<label>Nombre:</label>
+							<input class="input-control" id="nombre" name="nombre" maxlength="15" style="width:50%" required autocomplete="off">
+						</div>
+						
+						<div class="form-group">
+							<label style="margin-right:3px">Provincia:</label>
+							<select id="provincia" name="provincia" required style="CURSOR:pointer;width:40%;height:31px;margin-bottom:5px">
+									<option disabled selected hidden>Selecciona...</option>
+									<option value="ALBACETE">ALBACETE</option>
+									<option value="CIUDAD REAL">CIUDAD REAL</option>
+									<option value="CUENCA">CUENCA</option>
+									<option value="GUADALAJARA">GUADALAJARA</option>
+									<option value="TOLEDO">TOLEDO</option>                     
+							</select> 		
+						</div>					
+						
+						<div class="form-group">
+							<label>Edad:</label>
+							<input class="input-control" type="number" id="edad" name="edad" style="width: 20%" required
+							 maxlength="3" min="1" max="150" autocomplete="off" onclick="">
+						</div>					
+						
+						<div class="form-group">
+							<label>Fecha Alta:</label>
+							<input class="input-control" type="date" id="fecha" name="fecha" required 
+							 style="width:45%;cursor:pointer">
+						</div>
+						
+						<img id="img1" src="imagenes/usuario.png" width="80" height="80" style="border:1px solid blue;">
+
+						<div class="form-group">
+							<label>Imagen:</label>
+							<input class="input-control" id="foto1" name="foto1" type="file"  required 
+							style="padding-bottom: 10px;border:0px;" onchange="visualizo('foto1','img1')"></input>   
+						</div>
+						
+						<button class="boton" id="boton1" type="reset" form="formulario1"
+						onclick="document.getElementById('nombre').focus();borroimagen('img1');">
+						<i class="fa fa-trash"></i> Limpiar
+						</button>
+		
+						<button class="boton" id="boton2" type="submit" form="formulario1"
+						onclick="">
+						<i class="fa fa-home"></i> Alta
+						</button>					
+						
+						<button class="boton" id="boton3" type="button"
+						onclick="location.href=('/');">
+						<i class="fas fa-window-close"></i> Cancelar
+						</button>										
+				</form>
+				</div>
+	</div>
+	</div>
+	<%- include('03-FOOTER'); %> 
+</body>
+</html>
+
+
+<!-- ***************************************************************-->
+<!-- este código se ejecuta después de cargar la vista -->
+<!-- ***************************************************************-->
+<script type="text/javascript">
+	document.getElementById('nombre').focus();
+	//pongofecha();
+	function pongofecha()
+	{
+		var date = new Date();
+		var day = date.getDate();
+		var month = date.getMonth() + 1;
+		var year = date.getFullYear();
+		if (month < 10) month = "0" + month;
+		if (day < 10) day = "0" + day;
+		var hoy = year + "-" + month + "-" + day;       
+		document.getElementById('fecha').value=hoy;
+	}
+	function visualizo(objeto,pongo)
+	{
+		var seleccionArchivos =document.getElementById(objeto);
+		var archivos=seleccionArchivos.files;
+		var imagenPrevisualizacion = document.getElementById(pongo);
+
+		if (!archivos.length)
+		{
+			imagenPrevisualizacion.src="imagenes/usuario.png";
+			return;
+		}
+
+		// ahora tomamos el primer archivo, el cual vamos a previsualizar
+		var primerArchivo = archivos[0];
+		// lo convertimos a un objeto de tipo objectURL
+		var objectURL = URL.createObjectURL(primerArchivo);
+		// y a la fuente de la imagen le ponemos el objectURL
+		imagenPrevisualizacion.src = objectURL; 
+	}   
+	//**********************************************************************************
+	//**********************************************************************************
+	// para quitar la imagen del usuario si necesito quitarla
+	function borroimagen(objeto)
+	{
+		document.getElementById(objeto).src="imagenes/usuario.png";
+	}
+	//**********************************************************************************
+</script>
+

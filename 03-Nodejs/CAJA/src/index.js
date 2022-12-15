@@ -46,7 +46,11 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // ******* rutas *************************
 // aquí tenemos las rutas -> asociadas a nuestra aplicación
-app.use(require('./routes/las_rutas'));
+app.use(require('./routes/rutaprincipal'));
+app.use(require('./routes/lasrutas_ALTA'));
+app.use(require('./routes/lasrutas_CONSULTA'));
+app.use(require('./routes/lasrutas_BAJA'));
+app.use(require('./routes/lasrutas_LISTADO'));
 
 // iniciamos el servidor
 app.listen(app.get('port'), () =>
