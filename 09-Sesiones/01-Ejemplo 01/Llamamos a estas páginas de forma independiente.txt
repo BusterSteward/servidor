@@ -1,0 +1,11 @@
+Pagina1.php
+
+Da de alta 3 registros en el array $_SESSION, luego visualiza los 3 registros
+
+Pagina2.php
+
+Visualiza lo que hay en el array $_SESSION y luego da de alta otro registro
+
+Pagina3.php
+
+borra todo el contenido del array $_SESSION ya que elimina la sesión
