@@ -1,4 +1,5 @@
-USE andreshernandez_database;
+CREATE DATABASE  IF NOT EXISTS portal_clientes2;
+USE portal_clientes2;
 --
 -- Table structure for table clientes
 --

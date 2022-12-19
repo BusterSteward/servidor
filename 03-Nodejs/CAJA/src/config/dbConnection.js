@@ -12,9 +12,9 @@ module.exports = () =>
 {
   return mysql.createConnection(
   {
-		host: 'localhost',
-		user: 'jorge',
-		password: '666666',
-		database: 'portal_clientes2'
+		host: 'mysql-andreshernandez.alwaysdata.net',
+		user: '290844',
+		password: 'Simbionte13',
+		database: 'andreshernandez_database'
   });
 }

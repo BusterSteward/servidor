@@ -51,6 +51,8 @@ app.use(require('./routes/lasrutas_ALTA'));
 app.use(require('./routes/lasrutas_CONSULTA'));
 app.use(require('./routes/lasrutas_BAJA'));
 app.use(require('./routes/lasrutas_LISTADO'));
+app.use(require('./routes/lasrutas_MODIFICACION'));
+
 
 // iniciamos el servidor
 app.listen(app.get('port'), () =>
