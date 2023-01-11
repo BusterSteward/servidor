@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		<meta http-equiv="Pragma" content="no-cache">
+		 
+		<meta name="description" content="Prácticas con la Gestión de Ficheros en Servidor">
+		<meta name="author" content="Jorge López">
+
+		<link rel="shortcut icon" href="imagenes/icon.png"/>
+
+		<title>Ficheros</title>
+
+		<!-- estilo general de la página -->
+		<link href="ficheros/estilo_pagina.css" rel="stylesheet">
+		
+		<!-- estilo barra de menú -->
+		<link href="ficheros/barra_menu.css" rel="stylesheet">		
+
+		<!-- estilo formularios-botones -->
+		<link href="ficheros/formularios.css" rel="stylesheet">		
+		
+		<!-- biblioteca de iconos -->
+		<link href="ficheros/all.css" rel="stylesheet">
+		
+		<!-- librería jQuery -->
+		<script type="text/javascript" src="ficheros/jquery.js"></script>		
+</head>
+
+<script type="text/javascript">
+function inicio()
+{
+	// visualizo imágenes subidas al servidor
+	ver_imagenes();
+	
+	//alert("La resolución de tu pantalla es: " + screen.width + " x " + screen.height);
+	// monitor grande
+	if (screen.height>=1080)
+	{
+		document.getElementById('mensaje1').style.setProperty('max-height', (screen.height-350)+'px');
+		document.getElementById('imagenessubidas').style.setProperty('max-height', (screen.height-385)+'px');
+	}
+	// monitor 15.6"
+	else if (screen.height>=768)
+	{
+		document.getElementById('mensaje1').style.setProperty('max-height', (screen.height-405)+'px');
+		document.getElementById('imagenessubidas').style.setProperty('max-height', (screen.height-385)+'px');	
+	}	
+	// monitor 14"
+	else if (screen.height>=720)
+	{
+		document.getElementById('mensaje1').style.setProperty('max-height', (screen.height-440)+'px');
+		document.getElementById('imagenessubidas').style.setProperty('max-height', (screen.height-420)+'px');
+	}				
+}
+
+//************************************************************************************************
+//************************************************************************************************
+//******************************** SUBIDA ASÍNCRONA-jQuery ***************************************
+//************************************************************************************************
+//************************************************************************************************
+function subo_fichero()
+{
+	// visualizo estrella
+	document.getElementById('estrella').style.visibility='visible';	
+	
+	// borro si hay algo en el div donde se ven las imágenes subidas
+	document.getElementById('imagenessubidas').innerHTML="";		
+	// borramos contenido del div donde aparece el mensaje2
+	document.getElementById('mensaje1').innerHTML="";	
+
+	// preparo variables
+	var formData = new FormData(document.getElementById("formulario1"));		
+	var ruta="PHP-Subo_Fichero.php";
+	
+	// hago la llamada
+	$.ajax({
+		url: ruta,
+		type: "POST",
+		data: formData,
+		contentType: false,
+		processData: false,		
+		success: function(datos)
+		{
+			// oculto estrella
+			document.getElementById('estrella').style.visibility='hidden';
+			// situación inicial
+			document.getElementById('objetofile').value="";
+			
+			// visualizo el mensaje que me envía el servidor
+			document.getElementById('mensaje1').innerHTML=datos;		
+		}
+		});	
+}
+//************************************************************************************************
+//************************************************************************************************
+//********************************* VER Ficheros Subidos ********************************************
+//************************************************************************************************
+//************************************************************************************************
+function ver_imagenes()
+{
+	// visualizo estrella
+	document.getElementById('estrella2').style.visibility='visible';	
+	// borro si hay algo en el div donde se ven las imágenes subidas
+	document.getElementById('imagenessubidas').innerHTML="";	
+
+	// hago la llamada
+	$("#imagenessubidas").load("PHP-Ver_Ficheros.php",{},llegadaDatos1);	
+}
+
+function llegadaDatos1()
+{
+	// oculto estrella
+	document.getElementById('estrella2').style.visibility='hidden';	
+}
+</script>
+
+<body onload="inicio();">
+<!-- **************************** CABECERA ************************************************ -->
+<!-- **************************** CABECERA ************************************************ -->
+<!-- **************************** CABECERA ************************************************ -->
+<header>
+<div class="BarraNavegar">
+				<i class="fas fa-tv fa-2x" ></i>
+				<label  class="L1">Servidor 2º DAW</label>		
+				<label  class="L2"><b>Gestión de Ficheros</b></label>		
+				<label  class="L3">Versión 1.0</label>	
+</div>
+</header>
+
+<!-- **************************** CUERPO ************************************************ -->
+<!-- **************************** CUERPO ************************************************ -->
+<!-- **************************** CUERPO ************************************************ -->
+<div class="contenedor1">
+		<!-- AZUL -->
+		<div class="contenedor2">
+				<div class="contenedor3">
+						<form id="formulario1" name="formulario1" method="post" enctype="multipart/form-data">
+								<label id="label2">Subida Asíncrona-jQuery: (sólo 1 fichero)</label><br>
+								<input class="boton" id="objetofile" name="objetofile" type="file" style="CURSOR:pointer;"
+								onchange="subo_fichero()"/>
+						</form>
+
+						<div class="contenedor5" id="mensaje1" style="overflow-y: scroll;">
+						</div>						
+				</div>			
+		</div>
+
+		<!-- AZUL -->			
+		<div class="contenedor2">
+				<div class="contenedor3b" id="imagenessubidas" style="overflow-y: scroll;">
+				</div>			
+				
+				<div class="contenedor4">
+						<button class="boton" id="boton1" type="button"  
+						onclick="ver_imagenes();">
+						<i class="fas fa-file-image fa-2x"></i>&nbsp&nbspVer Ficheros
+						</button>
+						<img  id="estrella2" src="imagenes/estrella.gif"  height="40" width="40" 
+						style="visibility:hidden;"/>
+				</div>
+		</div>			
+</div>
+<!-- **************************** FOOTER ************************************************ -->
+<!-- **************************** FOOTER ************************************************ -->
+<!-- **************************** FOOTER ************************************************ -->
+<footer class="footer">
+		<img  id="estrella" src="imagenes/estrella.gif"  height="40" width="40" style="visibility:hidden;"/>
+		&nbsp&nbsp<i class="fas fa-building fa-2x" ></i>
+		<label>&nbsp © 2022 IES Escultor</label>		
+</footer>
+
+</body>
+</html>
