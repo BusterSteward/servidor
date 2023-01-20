@@ -18,17 +18,11 @@
 	$directorio = 'ficheros_subidos/';
 	
 	// comprobamos si el fichero existe en la carpeta
-	if (file_exists($directorio.$nombrefichero))
-		{
-			return true;
-		}
-	else
-		{
-			return false;
-		}
+	return file_exists($directorio.$nombrefichero);
+		
 	}	
 	//****************************************************************************************
-
+	require("conexion.php");
 	// en este array voy a almacenar los ficheros que se copien
 	$copiados=array();
 	$auxcopiados=0;
@@ -55,6 +49,8 @@
 	// OJO: ahora tenemos una 2ª dimensión en $_FILES
 	// Ahora $_FILES -> es bidimensional
 	// recorremos todo el array donde están los ficheros
+	$consulta1="INSERT INTO ficheros (FICHERO) VALUES ";
+	$consulta2="INSERT INTO historial (ACCION,FICHERO) VALUES ";
 	for ($i = 0; $i < $nelementos; $i++) 
 	{	
 			// consultamos si ya existe el fichero
@@ -72,12 +68,19 @@
 			else 
 			// si no hay ningún problema
 			{
+				$consulta1.='("'.$_FILES['objetofile1']['name'][$i].'"),';
+				$consulta2.='("SUBE","'.$_FILES['objetofile1']['name'][$i].'"),';
 				// copiamos al array el nombre del fichero copiado
 				$copiados[$auxcopiados]=$_FILES['objetofile1']['name'][$i];
 				$auxcopiados++;
 			}   
 	}
-	
+	$consulta1=substr($consulta1,0,strlen($consulta1)-1);
+	$consulta2=substr($consulta2,0,strlen($consulta2)-1);
+
+	mysqli_query($conexion,$consulta1);
+	mysqli_query($conexion,$consulta2);
+
 	// una ver terminado el bucle de copia visualizamos los correspondientes mensajes
 	if (count($copiados)>0)
 	{

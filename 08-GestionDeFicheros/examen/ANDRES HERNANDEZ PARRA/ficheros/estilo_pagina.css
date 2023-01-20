@@ -1,0 +1,166 @@
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+body
+{
+	  display: flex;
+	  flex-direction: column;
+	  margin: 0;
+	  min-height: 100vh;
+}
+
+.contenedor1
+{
+	display: flex;
+	flex-direction: row;
+	border-style: solid;
+	border-width: 2px;
+	border-color: navy;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	flex: 1;
+	/* eje horizontal - x */
+	justify-content: center;
+}
+
+.contenedor2
+{
+	display: flex;
+	  /* comportamiento de bloque */
+	 flex-direction: column;	
+	border-style: solid;
+	border-width: 2px;
+	border-color: blue;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	/* sólo estamos aplicando "flex-grow" */
+	flex: 1;
+	/* eje horizontal - x */
+	justify-content: center;
+	/* eje vertical - y */
+	align-items: center;	
+	margin: 15px;
+	
+}
+
+.contenedor3
+{
+	/*display: flex;*/
+	border-style: solid;
+	border-width: 1px;
+	border-color: orange;
+	margin:10px 0px 10px 0px;
+	padding:5px 0px 0px 10px;
+	box-sizing:border-box;
+	width:95%;
+	font-family: sans-serif;
+	flex: 1;
+}
+
+.contenedor3b
+{
+	/*display: flex;*/
+	border-style: solid;
+	border-width: 1px;
+	border-color: orange;
+	margin:10px 0px 10px 0px;
+	padding:5px;
+	box-sizing:border-box;
+	width:95%;
+	font-family: sans-serif;
+	flex: 1;
+}
+
+.contenedor4
+{
+	display:flex;
+	border-style: solid;
+	border-width: 1px;
+	border-color: brown;
+	margin:5px 0px 10px 0px;
+	padding:8px;
+	box-sizing:border-box;
+	width:95%;
+	font-family: sans-serif;
+	align-items: flex-end; 
+}
+
+.contenedor5
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color: green;
+	
+	margin-top:20px;
+	padding:5px;
+	box-sizing:border-box;
+	height:60%;
+	width:95%;
+	font-family: sans-serif;
+	flex: 1;
+}
+#boton1,#boton2,#boton3,#boton4,#boton5
+{
+	margin-right:7px;
+}
+.footer
+{
+	display: flex;
+	/* factor de contracción */
+	/* flex-shrink:0; */
+	background-color: DodgerBlue;
+	/* border-width: 1px; */
+	/* border-color: blue; */
+	height: 60px;
+	/* eje vertical - y */
+	align-items: center;
+	/* eje horizontal - x */
+	justify-content: center;	
+	color: white;
+	font-size: 16px;
+	font-family: sans-serif;
+}
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+@media (max-width: 1000px)
+{
+#objetofile1
+{
+	width:85%;
+}
+}
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+@media only screen and (max-width: 780px)
+{
+.contenedor1
+{
+	flex-direction: column;
+}
+
+.contenedor3
+{
+	min-height:200px;
+}
+
+.contenedor3b
+{
+	min-height:200px;
+}
+
+.contenedor5
+{
+	min-height:150px;
+	width:95%;
+	margin-bottom:10px;
+}
+
+#objetofile1
+{
+	width:85%;
+}
+
+}

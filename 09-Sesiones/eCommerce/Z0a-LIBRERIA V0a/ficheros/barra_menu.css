@@ -1,0 +1,224 @@
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+.BarraNavegar
+{
+	display: flex;
+	/* márgenes interiores de la barra de navegación */
+	padding: 5px 5px 3px 5px;
+	font-size: 20px;
+	color: black;	
+	background-color: white;
+	font-family: calibri;
+	align-items: flex-start;
+}
+
+.BarraNavegar2
+{
+	display: flex;
+	/* márgenes interiores de la barra de navegación */
+	padding: 5px 5px 3px 5px;
+	font-size: 20px;
+	color: black;	
+	background-color: white;
+	font-family: calibri;
+	align-items: flex-start;
+}
+
+.BarraNavegar label
+{
+	display:inline-block;
+	width: 80px;
+	
+	font-weight: bold;
+	font-size: 14px;
+	text-align: right;
+	box-sizing: border-box;
+	
+	border-width: 0px;
+	border-style: solid;
+	border-color: blue;
+}
+
+.input-control
+{
+	  width:90px;
+}
+
+.input-control:focus
+{
+	  background-color:#F6CEF5;
+}
+
+.Opcion_menu_right,.Opcion_menu_right2
+{
+	/* alinea estas opciones de menú a la derecha */
+	margin-left:auto;
+}
+
+.boton
+{
+  width:102px;
+  cursor:pointer;
+}
+
+.boton2
+{
+  background-color:  #F5B041; 
+  border: none; 
+  color: white; 
+  padding: 17px;
+  margin-top:0px;
+  margin-right:3px;
+  margin-left:0px;
+  font-size: 16px; 
+  cursor: pointer; 
+  /* redondeado */
+  border-radius: 8px;
+}
+
+.boton2:hover
+{
+  background-color: #C17904;
+}
+
+.boton2:disabled 
+{
+  background-color: red;
+  cursor: not-allowed;
+}
+
+#logo
+{
+	max-width: 100%;
+}
+
+#logo2
+{
+	padding-left:5px;
+}
+
+#info
+{
+	display:inline-block;
+	width: 120px;
+	
+	font-weight: normal;
+	font-size: 14px;
+	color: red;
+	text-align: left;
+	box-sizing: border-box;
+	
+	border-style: solid;
+	border-width: 1px;
+	border-color: blue;
+}
+
+#recordar
+{
+	margin-left:0px;
+	margin-right:0px;
+	cursor:pointer;
+}
+
+#carro2
+{
+	padding-top:0px;
+	height:45px;
+	width:45px;
+}
+
+#unidades
+{
+	border-style: solid;
+	border-width: 0px;
+	border-color: blue;
+	
+	height:25px;
+	width:32px;
+	text-align:left;	
+	font-family: calibri;	
+	font-size: 18px;
+	font-weight: normal;
+	color:red;
+	position: relative;
+	top: -14px;
+	left:-5px
+}
+
+#nombreuser
+{
+	border-style: solid;
+	border-width: 0px;
+	border-color: blue;
+	height:22px;
+	width:55px;
+	
+	text-align:left;	
+	font-family: calibri;	
+	font-size: 18px;
+	font-weight: normal;
+	color:blue;
+	position: relative;
+	top: -13px;
+	left:0px;
+}
+
+#boton2
+{
+  width:120px;
+  cursor:pointer;
+  position: relative;
+  top: -14px;
+  left:-6px;  
+}
+
+
+
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+@media (max-width: 1000px)
+{
+	
+.BarraNavegar
+{
+	/*flex-direction: column;*/
+}
+
+}
+
+
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+@media only screen and (max-width: 780px)
+{
+
+.BarraNavegar
+{
+	/*flex-direction: column;*/
+}
+
+.BarraNavegar2
+{
+	flex-direction: column;
+}
+
+.Opcion_menu_right2
+{
+	/* alinea estas opciones de menú a la derecha */
+	margin-left:0px;
+}
+
+#logo2
+{
+	padding-left:0px;
+	padding-top:5px;
+	padding-bottom:5px;
+}
+
+}

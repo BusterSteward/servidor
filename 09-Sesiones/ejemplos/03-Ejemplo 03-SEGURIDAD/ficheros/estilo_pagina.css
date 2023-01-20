@@ -1,0 +1,184 @@
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+body
+{
+	  display: flex;
+	  flex-direction: column;
+	  margin: 0;
+	  min-height: 100vh;
+}
+
+.contenedor1
+{
+	display: flex;
+	flex-direction: row;
+	border-style: solid;
+	border-width: 2px;
+	border-color: navy;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	flex: 1;
+	/* eje horizontal - x */
+	justify-content: center;
+}
+
+.contenedor2
+{
+	display: flex;
+	  /* comportamiento de bloque */
+	flex-direction: column;	
+	border-style: solid;
+	border-width: 2px;
+	border-color: blue;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	/* sólo estamos aplicando "flex-grow" */
+	/*flex: 1;*/
+	/* eje horizontal - x */
+	justify-content: center;
+	/* eje vertical - y */
+	align-items: center;	
+	margin: 15px;
+	padding:15px;
+	
+	width:100%;
+}
+
+.contenedor3
+{
+	display: flex;
+	flex-direction: column;	
+	border-style: solid;
+	border-width: 1px;
+	border-color: orange;
+
+	padding-top:10px;
+	font-family: sans-serif;
+	
+	align-items: right;	
+}
+
+.contenedor4
+{
+	display: flex;
+	flex-direction: column;	
+	border-style: solid;
+	border-width: 1px;
+	border-color: orange;
+
+	padding-top:20px;
+	height:50%;
+	width:40%;
+	font-family: sans-serif;
+}
+
+#info
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color: blue;
+	width:60%;
+	height:14px;
+	font-family: sans-serif;	
+	color:red;
+	margin-left:105px;
+	padding:5px;
+	margin-top:5px;
+	margin-bottom:10px;
+	font-size: 14px;
+}
+
+#recordar
+{
+	margin-left:105px;
+	cursor:pointer;
+}
+
+#correo
+{
+	max-width: 100%;
+}
+
+#logout
+{
+	text-align: right;
+}
+
+.footer
+{
+	display: flex;
+	/* factor de contracción */
+	/* flex-shrink:0; */
+	background-color: DodgerBlue;
+	/* border-width: 1px; */
+	/* border-color: blue; */
+	height: 60px;
+	/* eje vertical - y */
+	align-items: center;
+	/* eje horizontal - x */
+	justify-content: center;	
+	color: white;
+	font-size: 16px;
+	font-family: sans-serif;
+}
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+@media (max-width: 1000px)
+{
+#info
+{
+	margin-left:10px;
+	width:80%;
+	height:11px;
+	font-size: 12px;
+	color:red;
+}
+
+#recordar
+{
+	margin-left:10px;
+}
+
+.contenedor4
+{
+	height:65%;
+}	
+
+}
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+@media only screen and (max-width: 780px)
+{
+.contenedor1
+{
+	flex-direction: column;
+		align-items: center;
+	
+}
+
+.contenedor2
+{
+	width:85%;
+	padding-top:10px;
+	margin-bottom:10px;
+
+}
+
+.contenedor4
+{
+	width:90%;
+
+}
+
+#info
+{
+font-size: 10px;
+color: red;
+height:9px;
+}
+
+}

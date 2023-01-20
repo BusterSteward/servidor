@@ -1,0 +1,10 @@
+Usuario: JORGE
+Jugadas Realizadas: 14
+
+Carta nº1=1
+Carta nº2=2
+Carta nº3=2
+Carta nº4=2
+Carta nº5=4
+Carta nº6=1
+Carta nº7=2

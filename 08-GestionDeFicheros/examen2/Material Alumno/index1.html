@@ -125,12 +125,18 @@ function llegadaDatos1()
 //************************************************************************************************
 function ver_imagenes2()
 {
-
+	// visualizo estrella
+	document.getElementById('estrella2').style.visibility='visible';	
+	// borro si hay algo en el div donde se ven las imágenes subidas
+	document.getElementById('imagenessubidas').innerHTML="";	
+	
+	// hago la llamada
+	$("#imagenessubidas").load("PHP-Ver_Ficheros2.php",{},llegadaDatos2);	
 }
 
 function llegadaDatos2()
 {
-
+	document.getElementById('estrella2').style.visibility='hidden';	
 }
 
 //************************************************************************************************
@@ -175,12 +181,18 @@ function llegadaDatos3()
 //************************************************************************************************
 function ver_historial()
 {
-
+	// visualizo estrella
+	document.getElementById('estrella2').style.visibility='visible';	
+	// borro si hay algo en el div donde se ven las imágenes subidas
+	document.getElementById('imagenessubidas').innerHTML="";	
+	
+	// hago la llamada
+	$("#imagenessubidas").load("PHP-Ver_Historial.php",{},llegadaDatos4);
 }
 
 function llegadaDatos4()
 {
-
+	document.getElementById('estrella2').style.visibility='hidden';	
 }
 
 </script>

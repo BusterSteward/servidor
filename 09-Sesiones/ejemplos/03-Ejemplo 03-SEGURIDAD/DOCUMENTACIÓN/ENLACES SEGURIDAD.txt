@@ -1,0 +1,31 @@
+****************************************************
+Encriptar contraseñas con PHP:
+****************************************************
+
+https://www.conasa.es/blog/como-almacenar-contrasenas-seguras-en-php/
+
+password-hash()
+https://www.php.net/manual/es/function.password-hash.php
+
+password-verify()
+https://www.php.net/manual/es/function.password-verify.php
+
+****************************************************
+Quitar caracteres peligrosos
+****************************************************
+
+stripslashes()
+https://www.php.net/manual/es/function.stripslashes.php
+
+mysqli.real-escape-string()
+https://www.php.net/manual/es/mysqli.real-escape-string.php
+
+****************************************************
+Páginas seguras https:
+****************************************************
+
+https://www.hostinet.com/formacion/hosting-alojamiento/cambiar-pagina-web-https/
+
+https://www.mikroways.net/2009/06/24/habilitar-https-en-apache/
+
+https://www.mikroways.net/2010/01/04/generar-certificados-ssl/
