@@ -29,6 +29,8 @@
 		
 		<!-- biblioteca de iconos -->
 		<link href="ficheros/all.css" rel="stylesheet">
+
+		<link rel="stylesheet" href="ficheros/tablas.css">
 		
 		<!-- librería jQuery -->
 		<script type="text/javascript" src="ficheros/jquery.js"></script>		
@@ -117,7 +119,7 @@ function llegadaDatos1(datos)
 		document.getElementById('botonj').disabled=false;	
 		document.getElementById('botond').disabled=false;	
 		document.getElementById('botonbd').disabled=false;	
-		document.getElementById('botontxt').disabled=false		
+		document.getElementById('botontxt').disabled=false;		
 		// deshabilito CAJAS DE TEXTO
 		document.getElementById('user').disabled=true;	
 		document.getElementById('password').disabled=true;	
@@ -134,7 +136,19 @@ function llegadaDatos1(datos)
 //***************************************************************************************
 function ver_jugadas_totales()
 {
-	
+	document.getElementById('estrella').style.visibility='visible';
+
+	//deshabilito todo
+	document.getElementById('botonj').disabled=true;	
+	document.getElementById('botond').disabled=true;	
+	document.getElementById('botonbd').disabled=true;	
+	document.getElementById('botontxt').disabled=true;			
+	document.getElementById('botonr').disabled=true;			
+	document.getElementById('boton2').disabled=true;
+
+	const url="PHP-Ver_jugadas_TOTALES.php";
+
+	$("#jugadas").load(url,{},llegadaDatos2);
 
 }
 
@@ -142,7 +156,17 @@ function ver_jugadas_totales()
 function llegadaDatos2()
 {
 	// oculto estrella
-	document.getElementById('estrella').style.visibility='hidden';	
+	document.getElementById('estrella').style.visibility='hidden';
+	
+	// habilito botón VER JUGADAS
+		document.getElementById('botonj').disabled=false;	
+		document.getElementById('botond').disabled=false;	
+		document.getElementById('botonbd').disabled=false;	
+		document.getElementById('botontxt').disabled=false;			
+		// habilito botón JUGAR
+		document.getElementById('botonr').disabled=false;			
+		// habilito botón LOGOUT
+		document.getElementById('boton2').disabled=false;
 }
 
 //**********************************FUNCIONALIDAD-2******************************************
@@ -152,14 +176,18 @@ function llegadaDatos2()
 //********************************************************************************************
 function ver_jugadas()
 {
+	document.getElementById('estrella').style.visibility='visible';
+	//deshabilito todo
+	document.getElementById('botonj').disabled=true;	
+	document.getElementById('botond').disabled=true;	
+	document.getElementById('botonbd').disabled=true;	
+	document.getElementById('botontxt').disabled=true;			
+	document.getElementById('botonr').disabled=true;			
+	document.getElementById('boton2').disabled=true;
 
-}
+	const url="PHP-Ver_jugadas.php";
 
-// callback
-function llegadaDatos3()
-{
-	// oculto estrella
-	document.getElementById('estrella').style.visibility='hidden';	
+	$("#jugadas").load(url,{},llegadaDatos2);
 }
 
 //**********************************FUNCIONALIDAD-3******************************************
@@ -170,14 +198,22 @@ function llegadaDatos3()
 function base_datos()
 {
 	
+	document.getElementById('estrella').style.visibility='visible';
+	//deshabilito todo
+	document.getElementById('botonj').disabled=true;	
+	document.getElementById('botond').disabled=true;	
+	document.getElementById('botonbd').disabled=true;	
+	document.getElementById('botontxt').disabled=true;			
+	document.getElementById('botonr').disabled=true;			
+	document.getElementById('boton2').disabled=true;
+
+	const url="PHP-BaseDatos.php";
+
+	$("#jugadas").load(url,{},llegadaDatos2);
 }
 
 // callback
-function llegadaDatos4()
-{
-	// oculto estrella
-	document.getElementById('estrella').style.visibility='hidden';	
-}
+
 
 
 
@@ -188,14 +224,18 @@ function llegadaDatos4()
 //********************************************************************************************
 function fichero_texto()
 {
+	document.getElementById('estrella').style.visibility='visible';
+	//deshabilito todo
+	document.getElementById('botonj').disabled=true;	
+	document.getElementById('botond').disabled=true;	
+	document.getElementById('botonbd').disabled=true;	
+	document.getElementById('botontxt').disabled=true;			
+	document.getElementById('botonr').disabled=true;			
+	document.getElementById('boton2').disabled=true;
 
-}
+	const url="PHP-FicheroTexto.php";
 
-// callback
-function llegadaDatos5()
-{
-	// oculto estrella
-	document.getElementById('estrella').style.visibility='hidden';	
+	$("#jugadas").load(url,{},llegadaDatos2);
 }
 
 
@@ -276,7 +316,7 @@ function jugar()
 		// al script PHP le pasaremos el nº de carta visualizada -> carta
 		//*********************************************************************************
 		var url = "PHP-altadejugada.php";
-		$.post(url,{lacarta:carta});
+		$.post(url,{lacarta:carta,njugada:contador1});
 		//*********************************************************************************
 		//*********************************************************************************		
 		

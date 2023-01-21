@@ -8,10 +8,27 @@ table.table
    width: 80%;
 }
 
+.table tr{
+  display: flex;
+  justify-content: space-between;
+  width: 400px;
+
+}
+
+.table img{
+  width: 60px;
+  height: 100px;
+  display: block;
+  margin: auto;
+}
 .table th,.table td
 { 
-  text-align: left; 
-  vertical-align: middle;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  text-align: center;
+  flex-direction: column;
+  width: 29%;
   padding: 0.40em;
   border: 1px solid blue;
   font-family: calibri;
@@ -30,14 +47,14 @@ table.table
 .table td:nth-child(1),
 .table th:nth-child(1)
 {
-	width:30%;
+	width:10%;
 }
 
 /* nombre */
 .table td:nth-child(2),
 .table th:nth-child(2)
 {
-	width:30%;
+	width:70%;
 }
 
 
@@ -48,7 +65,7 @@ table.table
 	text-align: center;
 	  /*background-color: lemonchiffon;
 	  color: black;*/
-	width:5%;
+	width:15%;
 }
 
 /* precio */
@@ -80,6 +97,7 @@ table.table
   /*background-color: lightblue;
   color: blue;*/
 }
+
 
 
 
