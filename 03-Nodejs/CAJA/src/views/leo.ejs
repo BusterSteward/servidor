@@ -1,0 +1,31 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+<body onload="document.getElementById('articulo').focus();">
+	<%- include('02-HEADER-6'); %> 
+
+	<div class="contenedor1">
+	<div id="cajapagina" class="contenedor2">
+			<div class="contenedor-formulario" style="width:30%;">
+			<legend class="leyenda">Leo Datos:</legend><br>
+			<div class="div_mensaje" style="width:60%;height:35px;"> hay <%= elementos %> elementos:</div>
+                                     
+             <div class="div_mensaje5" style="width:59%;">
+                      
+                 <% for (var i = 0; i < articulos.length; i ++)
+				 { %>
+					 <%= articulos[i].articulo%>***<%= articulos[i].precio%><br><br>
+				 <% } %>
+             </div>    
+			<br>
+			
+			<button class="boton" id="boton3" type="button"
+			onclick="location.href=('/entrada');">
+			<i class="fas fa-window-close"></i> Volver
+			</button><br><br>
+			</div>
+	</div>
+	</div>
+	<%- include('03-FOOTER'); %> 
+</body>
+</html>	

@@ -60,24 +60,89 @@ body
 	
 	/* para que pueda crecer */
 	flex-Grow: 1;
-	
-	
-	
 	font-family: sans-serif;
 }
 
 
-.label_mensaje
+.div_mensaje
 {
+	display: flex;
 	border-style: solid;
 	border-width: 1px;
-	border-color: blue;
-	  /* redondeado */
-	border-radius: 6px;
-	padding:7px;
+	border-color: LightSalmon;
+	background-color:NavajoWhite;
+	color: brown;
 	
+	align-items: center;
+	justify-content: center;		
+	
+	border-radius: 4px;
 }
 
+.div_mensaje2
+{
+	display: flex;
+	border-style: solid;
+	border-width: 1px;
+	border-color: MediumTurquoise;
+	background-color:LightCyan;
+	color: brown;
+	
+	align-items: center;
+	justify-content: center;		
+	
+	border-radius: 4px;
+}
+
+.div_mensaje3
+{
+	display: flex;
+	border-style: solid;
+	border-width: 1px;
+	border-color: MediumTurquoise;
+	background-color:LightCyan;
+	color: brown;
+	
+	align-items: center;
+	justify-content: left;		
+	font-size: 14px;
+	border-radius: 4px;
+	margin-left:5px;
+}
+
+.div_mensaje4
+{
+	display: flex;
+	border-style: solid;
+	border-width: 1px;
+	border-color: LightSalmon;
+	background-color:NavajoWhite;
+	color: brown;
+	
+	align-items: center;
+	justify-content: left;		
+	font-size: 14px;
+	border-radius: 4px;
+	margin-left:5px;
+}
+
+.div_mensaje5
+{
+	display: flex;
+	border-style: solid;
+	border-width: 1px;
+	border-color: MediumTurquoise;
+	background-color:LightCyan;
+	color: brown;
+	
+	align-items: center;
+	justify-content: left;		
+	
+	border-radius: 4px;
+	padding-left:5px;
+	padding-top:10px;
+	margin:10 20 10 0;
+}
 .footer
 {
 	display: flex;
@@ -147,6 +212,7 @@ body
 	{
 		margin-left:5px;
 	}
+	
 }
 
 

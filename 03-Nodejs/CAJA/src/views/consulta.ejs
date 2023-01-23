@@ -3,7 +3,7 @@
 
 
 <body onload="document.getElementById('id').focus();">
-	<%- include('02-HEADER-consulta'); %> 
+	<%- include('02-HEADER-2'); %> 
 
 	<div class="contenedor1">
 	<div id="cajapagina" class="contenedor2">
@@ -11,19 +11,19 @@
 				<!-- /consulta pero con el método POST-->
 				
 				<div class="contenedor-formulario">
-				<form id="formulario1" action="/consulta" method="post" autocomplete="off"> 
+				<form action="/consulta" method="post" autocomplete="off"> 
 				<legend class="leyenda">Consulta de Cliente: </legend><br>
 						<div class="form-group">
 							<label>Id Cliente:</label>
-							<input class="input-control" type="number" id="id" name="id" min="1" max="150" style="width:15%" required autocomplete="off">
+							<input class="input-control" id="id" name="id" maxlength="3" style="width:15%" required autocomplete="off">
 						</div><br><br><br>
 						
-						<button class="boton" id="boton1" type="reset" form="formulario1"
+						<button class="boton" id="boton1" type="reset"
 						onclick="document.getElementById('id').focus();">
 						<i class="fa fa-trash"></i> Limpiar
 						</button>
 		
-						<button class="boton" id="boton2" type="submit" form="formulario1"
+						<button class="boton" id="boton2" type="submit"
 						onclick="">
 						<i class="fa fa-home"></i> Consulta
 						</button>					

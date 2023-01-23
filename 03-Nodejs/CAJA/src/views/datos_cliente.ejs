@@ -1,0 +1,57 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+<body onload="document.getElementById('id').focus();">
+	<%- include('02-HEADER-4'); %> 
+
+	<div class="contenedor1">
+	<div id="cajapagina" class="contenedor2">
+              
+			<div class="contenedor-formulario">
+  			<legend class="leyenda">Datos de Cliente: </legend><br>
+			<img src="data:image/jpeg;base64,<%= imagenbd %>" width="94" height="94">
+			<img src="<%= data[0].imagen2 %>" width="94" height="94"><br><br>
+			
+    		<div class="form-group">
+				<label>Id Cliente:</label>
+				<input class="input-control" id="id" name="id" readonly value="<%= data[0].id %>" style="width: 15%">
+			</div>
+
+			<div class="form-group">
+				<label>Nombre:</label>
+				<input class="input-control" id="nombre" name="nombre" readonly value="<%= data[0].nombre %>" style="width: 60%">
+			</div>
+
+			<div class="form-group">
+				<label>Apellido:</label>
+				<input class="input-control" id="apellido" name="apellido" readonly value="<%= data[0].apellido %>" style="width: 60%">
+			</div>
+
+			<div class="form-group">
+				<label>Móvil:</label>
+				<input class="input-control" id="movil" name="movil" readonly value="<%= data[0].movil %>" style="width: 40%">
+			</div>
+			
+			<div class="form-group">
+				<label>Usuario:</label>
+				<div class="div_mensaje3" style="width:90%;height:30px;padding-left:10px"><%= data[0].user_name %></div>
+				<!-- <input class="input-control" id="movil" name="movil" readonly value="<%= data[0].user_name %>" style="width: 40%"> -->
+			</div>
+ 
+			<div class="form-group">
+				<label>Contraseña:</label>
+				<div class="div_mensaje4" style="width:90%;height:30px;padding-left:10px"><%= data[0].password %></div>
+				<!-- <input class="input-control" id="movil" name="movil" readonly value="<%= data[0].password %>" style="width: 40%"> -->
+			</div>			
+			
+			<button class="boton" id="boton3" type="button" style="margin-top:30px;"
+			onclick="location.href=('/entrada');">
+			<i class="fas fa-window-close"></i> Volver
+			</button><br><br>			
+			</div>
+	</div>
+	</div>
+	<%- include('03-FOOTER'); %> 
+</body>
+</html>
+			  

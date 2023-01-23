@@ -1,0 +1,49 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+
+<body id="clrblk" onload="document.getElementById('login-username').focus();">
+	<%- include('02-HEADER-1'); %> 
+
+	<div class="contenedor1">
+	<div id="cajapagina" class="contenedor2">
+			<div class="contenedor-formulario">
+			<form action="/login" method="post" autocomplete="off"> 
+					<legend class="leyenda">Datos de acceso: </legend>
+					
+					<div class="div_mensaje" style="width:100%;height:35px;"><%= mensaje %></div><br>
+					
+					<div class="form-group">
+							<label>Usuario:</label>
+							<i id='el_logo' class="fas fa-user fa-lg"></i>
+							<input class="input-control" id="login-username" name="user_name" 
+							maxlength="20" style="width:70%" required autocomplete="off">
+					</div>
+					
+					<div class="form-group">
+							<label>Contraseña:</label>
+							<i id='el_logo' class="fas fa-key fa-lg"></i>
+							<input class="input-control" type="password" id="login-password" name="password"
+							maxlength="20" style="width:70%" required autocomplete="off">
+					</div><br>
+					
+					<button class="boton" id="boton1" type="reset"
+					onclick="document.getElementById('login-username').focus();">
+					<i class="fa fa-trash"></i> Limpiar
+					</button>
+		
+					<button class="boton" id="boton2" type="submit"
+					onclick="">
+					<i class="fa fa-home"></i> Login
+					</button><br><br>			
+					
+					<div class="div_mensaje2" style="width:100%;height:35px;">No tienes cuenta?&nbsp<a href="/registro">Registro aquí</a></div>				
+				
+				</form>
+				</div>
+	</div>
+	</div>
+	<%- include('03-FOOTER'); %> 
+</body>
+</html>
+		

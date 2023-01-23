@@ -6,7 +6,7 @@
 {
 
 	padding-top: 30px;
-	padding-right: 20px;
+	padding-right: 30px;
 	padding-bottom: 10px;
 	padding-left: 30px;
 	
@@ -25,7 +25,7 @@
  
  .form-group label
 {
-	width: 100px;
+	width: 120px;
 	height: 25px;
 	font-weight: bold;
 	font-size: 16px;
@@ -38,16 +38,19 @@
 	margin-bottom: 10px;
 	margin-right: 8px;
 	margin-left: 3px;
-	height: 25px;
+	height: 30px;
 	
 	font-family: Helvetica;
 	font-size: 16px;
-	text-transform: uppercase;  
+	/*text-transform: uppercase;  */
+	
+  border: 1px solid black;
+  border-radius: 4px;	
 }
 
 .input-control
 {
-	text-transform: uppercase;  
+	/*text-transform: uppercase;  */
 }
 
 
@@ -55,6 +58,12 @@
 {
 	background-color:#F6CEF5;
 }
+ 
+#el_logo
+ {
+	 margin-top: 9px;
+	 margin-left:4px;
+ }
  
  .leyenda
  {
@@ -66,10 +75,13 @@
  
 #img1
 {
-	margin-left: 105px;
+	margin-left: 123px;
 	margin-bottom: 5px;
 }
-
+#img2
+{
+	margin-bottom: 5px;
+}
 .boton
 {
   background-color: DodgerBlue; 
@@ -171,10 +183,7 @@
 .contenedor-formulario
 {
 	border-color: fuchsia;   
-	padding: 20px;
-	margin-bottom:20px;
-	margin-top:20px;
-	
+	padding: 40px;
 }
 
 .form-group

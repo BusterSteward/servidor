@@ -1,0 +1,113 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+<body onload="document.getElementById('tnombre').focus();">
+	<%- include('02-HEADER-2'); %> 
+
+	<div class="contenedor1">
+	<div id="cajapagina" class="contenedor2">
+			<div class="contenedor-formulario">
+			<form action="/registro" method="post" autocomplete="off" enctype="multipart/form-data"> 
+					<legend class="leyenda">Alta de Perfil: </legend><br>
+					
+					<div class="div_mensaje" style="width:100%;height:35px;"> <%= mensaje %> </div><br>
+					
+					<div class="form-group">
+						<label>Nombre:</label>
+						<input class="input-control" id="tnombre" name="tnombre" maxlength="10" style="width:60%" required autocomplete="off">
+					</div>
+
+					<div class="form-group">
+						<label>Apellido:</label>
+						<input class="input-control" id="tapellido" name="tapellido" maxlength="10" style="width:60%" required autocomplete="off">
+					</div>
+
+					<div class="form-group">
+						<label>Móvil:</label>
+						<input class="input-control" type="number" id="tmovil" name="tmovil" style="width: 30%;" required
+						 min="111111111" max="999999999" autocomplete="off">
+					</div>					
+
+					<div class="form-group">
+							<label>Usuario:</label>
+							<i id='el_logo' class="fas fa-user fa-lg"></i>
+							<input class="input-control" id="tusuario" name="tusuario" 
+							maxlength="20" style="width:50%;background-color:LightCyan;" required autocomplete="off">
+					</div>
+					
+					<div class="form-group">
+							<label>Contraseña:</label>
+							<i id='el_logo' class="fas fa-key fa-lg"></i>
+							<input class="input-control" type="password" id="tpassword" name="tpassword"
+							maxlength="20" style="width:50%;background-color:LightCyan;" required autocomplete="off">
+					</div>
+					
+					<img id="img1" src="imagenes/usuario.png" width="80" height="80" style="border:1px solid blue" >
+					<img id="img2" src="imagenes/usuario.png" width="80" height="80" style="border:1px solid blue" >
+					
+					<div class="form-group">
+						<label>Imagen-1:</label>
+						<input class="input-control" id="foto1" name="foto1" type="file"  required 
+						style="padding-bottom: 10px;border:0px;" onchange="visualizo('foto1','img1')"></input>   
+					</div>
+
+					<div class="form-group">
+						<label>Imagen-2:</label>
+						<input class="input-control" id="foto2" name="foto2" type="file" required 
+						style="padding-bottom: 10px;border:0px;" onchange="visualizo('foto2','img2')"></input>   
+					</div>
+
+					<button class="boton" id="boton1" type="reset"
+					onclick="document.getElementById('tnombre').focus();borroimagen('img1');borroimagen('img2');">
+					<i class="fa fa-trash"></i> Limpiar
+					</button>
+	
+					<button class="boton" id="boton2" type="submit">
+					<i class="fa fa-home"></i> Alta
+					</button>					
+					
+					<button class="boton" id="boton3" type="button"
+					onclick="location.href=('/');">
+					<i class="fas fa-window-close"></i> Cancelar
+					</button><br><br>
+					
+					<div class="div_mensaje2" style="width:100%;height:35px;"><a href="/login">Login</a></div>
+			</form>
+			</div>
+	</div>
+	</div>
+	<%- include('03-FOOTER'); %> 
+</body>
+</html>
+
+<script type="text/javascript">
+//**********************************************************************************
+// esta función la utilizo para pre-visualizar la imagen de usuario que selecciono
+function visualizo(objeto,pongo)
+{
+	var seleccionArchivos =document.getElementById(objeto);
+	var archivos=seleccionArchivos.files;
+	var imagenPrevisualizacion = document.getElementById(pongo);
+
+    if (!archivos.length)
+    {
+		imagenPrevisualizacion.src="imagenes/usuario.png";
+		return;
+    }
+
+    // ahora tomamos el primer archivo, el cual vamos a previsualizar
+    var primerArchivo = archivos[0];
+    // lo convertimos a un objeto de tipo objectURL
+    var objectURL = URL.createObjectURL(primerArchivo);
+    // y a la fuente de la imagen le ponemos el objectURL
+    imagenPrevisualizacion.src = objectURL; 
+}    
+//**********************************************************************************
+//**********************************************************************************
+// para quitar la imagen del usuario si necesito quitarla
+function borroimagen(objeto)
+{
+	 document.getElementById(objeto).src="imagenes/usuario.png";
+}
+//**********************************************************************************
+</script>

@@ -1,0 +1,41 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+<body onload="document.getElementById('articulo').focus();">
+	<%- include('02-HEADER-5'); %> 
+
+	<div class="contenedor1">
+	<div id="cajapagina" class="contenedor2">
+			<div class="contenedor-formulario">
+			<form action="/meto" method="post" autocomplete="off" > 
+			<legend class="leyenda">Meto Dato:</legend><br>
+ 					<div class="form-group">
+						<label>Artículo:</label>
+						<input class="input-control" id="articulo" name="articulo" maxlength="10" style="width:60%" required autocomplete="off">
+					</div>					
+					
+					<div class="form-group">
+						<label>Precio:</label>
+						<input class="input-control" type="number" id="precio" name="precio" style="width: 20%;" required
+						 min="1" max="999999999" autocomplete="off">
+					</div><br>							
+					
+					<button class="boton" id="boton1" type="reset"
+					onclick="document.getElementById('articulo').focus();">
+					<i class="fa fa-trash"></i> Limpiar
+					</button>
+	
+					<button class="boton" id="boton2" type="submit">
+					<i class="fa fa-home"></i> Meto
+					</button>					
+					
+					<button class="boton" id="boton3" type="button"
+					onclick="location.href=('/entrada');">
+					<i class="fas fa-window-close"></i> Cancelar
+					</button><br><br>
+			</div>
+	</div>
+	</div>
+	<%- include('03-FOOTER'); %> 
+</body>
+</html>					

@@ -5,7 +5,7 @@
 
 table.table
 {
-   width: 80%;
+   width: 90%;
 }
 
 .table th,.table td
@@ -39,47 +39,39 @@ table.table
 .table td:nth-child(2),
 .table th:nth-child(2)
 {
-  text-align: center;
-  width:10%;
+  text-align: left;
+  /*background-color: lightgreen; */
+  width:25%;
 }
 
 .table td:nth-child(3),
 .table th:nth-child(3)
 {
   text-align: left;
-  /*background-color: lightgreen; */
+  /*background-color: lightblue;*/
   width:20%;
 }
 
 .table td:nth-child(4),
 .table th:nth-child(4)
 {
-  text-align: left;
-  /*background-color: lightblue;*/
-  width:20%;
+  text-align: center;
+  /*background-color: lightpink;*/
+  width:10%;
 }
 
 .table td:nth-child(5),
 .table th:nth-child(5)
 {
   text-align: center;
-  /*background-color: lightpink;*/
-  width:5%;
+  width:10%;
 }
 
 .table td:nth-child(6),
 .table th:nth-child(6)
 {
   text-align: center;
-  width:10%;
-}
-
-.table td:nth-child(7),
-.table th:nth-child(7)
-{
-  background-color: lemonchiffon;
-  text-align: center;
-  width:40%;
+  width:30%;
 }
 /**************************** TAMAÑO TABLET ************************************/
 /**************************** TAMAÑO TABLET ************************************/
