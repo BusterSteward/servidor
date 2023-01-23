@@ -66,40 +66,54 @@ function llegadaDatos1(datos)
 	
 	const selects=document.getElementsByTagName("select");
 	for(let i=0;i<selects.length;i++){
-		selects.item(i).addEventListener("change",function(){
+		selects.item(i).addEventListener("change",modificarCantidad);
+		
+	}	
+}
+
+function modificarCantidad(){
+	document.getElementById('estrella').style.visibility='visible';
+
+	const id=this.parentNode.parentNode.children[0].innerText;
+
+	let unidades,precioUnitario,subtotalNode,subtotalAnterior,totalNode,total,subtotalNuevo,diferencia;
 	
-			const id=this.parentNode.parentNode.children[0].innerText;
+	unidades=parseFloat(this.value);
+
+	precioUnitario=this.parentNode.parentNode.children[6].innerText;
+	precioUnitario=precioUnitario.substring(0,precioUnitario.length-3);
+	precioUnitario=parseFloat(precioUnitario);
+
+	subtotalNode=this.parentNode.parentNode.children[7];
+	subtotalAnterior=subtotalNode.innerText;
 	
-			let unidades=parseFloat(this.value);
-			let precioUnitario=this.parentNode.parentNode.children[6].innerText;
-			subtotalNode=this.parentNode.parentNode.children[7];
-			let subtotalAnterior=subtotalNode.innerText;
-			let totalNode=document.getElementById("totalTabla");
+	totalNode=document.getElementById("totalTabla");
+	total=totalNode.innerText;
+	total=total.substring(0,total.length-3);
+	total=parseFloat(total);
 
-			let total=totalNode.innerText;
-			precioUnitario=precioUnitario.substring(0,precioUnitario.length-3);
-			subtotalAnterior=subtotalAnterior.substring(0,subtotalAnterior.length-3);
-			total=total.substring(0,total.length-3);
-			precioUnitario=parseFloat(precioUnitario);
-			subtotalAnterior=parseFloat(subtotalAnterior);
-			total=parseFloat(total);
+	subtotalAnterior=subtotalAnterior.substring(0,subtotalAnterior.length-3);
+	subtotalAnterior=parseFloat(subtotalAnterior);
 
-			let subtotalNuevo=precioUnitario*unidades;
-			let diferencia=subtotalAnterior-subtotalNuevo;
-			total-=diferencia;
-			total=total.toFixed(2);
-			subtotalNuevo+=" €";
-			total+=" €";
-
-			
-
-			console.log(precioUnitario," ",subtotalAnterior," ",subtotalNuevo," ",total);
-		});
-
-	}
+	subtotalNuevo=precioUnitario*unidades;
+	subtotalNuevo = subtotalNuevo.toFixed(2);
 	
+	diferencia=subtotalAnterior-subtotalNuevo;
+	total-=diferencia;
+	total=total.toFixed(2);
+	subtotalNuevo+=" €";
+	total+=" €";
 
-	
+	subtotalNode.innerText=subtotalNuevo;
+	totalNode.innerText=total;
+
+	const url="PHP-modificarCantidad.php";
+
+	$.post(url,{producto:id,cantidad:unidades},llegadaDatos2);
+
+};
+function llegadaDatos2(datos){
+	document.getElementById('estrella').style.visibility='hidden';
 }
 
 </script>
