@@ -1,0 +1,140 @@
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+
+.titulo
+{
+	font-size: 24px;
+	color: white;
+}
+
+.L1
+{
+	font-size: 22px;
+	font-family:Calibri;
+	color:#6DCFFA;
+	padding-left: 10px;
+	padding-right: 10px;
+	/*align-self: flex-end;*/
+}
+
+.BarraNavegar
+{
+	display: flex;
+	/* márgenes interiores de la barra de navegación */
+	padding: 10px;
+	font-size: 20px;
+	color: white;	
+	background-color: DodgerBlue;
+	font-family: calibri;
+}
+ 
+.Grupo_opciones
+{
+	display:flex;
+	/* centrado vertical-propiedad flex */
+	align-items: center;
+	
+}
+ 
+.Opcion_menu
+{
+	/* espacio a la derecha entre opciones de menú */
+	padding-right: 30px;
+}
+
+.label_menu
+{
+	cursor:pointer;
+}
+ 
+.label_menu: hover
+{
+  color: black;
+}
+
+.Grupo_opciones_derecha
+{
+	/* alinea estas opciones de menú a la derecha */
+	/* cogerá el máximo margen a la izquierda */
+	margin-left:auto;
+}
+
+.Opcion_menu_icono
+{
+	display: none;
+}
+
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+@media (max-width: 1000px)
+{
+.titulo
+{
+	font-size: 18px;
+}
+
+.Opcion_menu
+{
+	/* espacio a la derecha entre opciones de menú */
+	padding-right: 15px;
+}
+
+.label_menu
+{
+	font-size: 18px;
+}
+
+}
+
+
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+@media only screen and (max-width: 780px)
+{
+
+.titulo
+{
+	font-size: 20px;
+}
+
+.Grupo_opciones,.BarraNavegar
+{
+	flex-direction: column;
+}
+
+.Grupo_opciones
+{
+	display:none;
+}
+		
+.Grupo_opciones_derecha
+{
+	margin-left:0;
+}
+
+.Opcion_menu_icono
+{
+	/* visualizo icono móvil */
+	display:inline;
+	/* anulo align-items */
+	/* comportamiento bloque -> alineación horizontal */
+	align-self: flex-end;
+	
+	/* cambiar política de posicionamiento */
+	position: absolute;
+	margin-top: 15px;
+	cursor: pointer;
+}	 
+
+.visualizo
+{
+	display: flex;
+}	 
+
+}

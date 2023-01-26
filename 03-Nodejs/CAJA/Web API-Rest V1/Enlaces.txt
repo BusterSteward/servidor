@@ -1,0 +1,5 @@
+Envío de ficheros con Curl
+https://www.it-swarm-es.com/es/php/enviar-archivo-traves-de-curl-desde-el-formulario-post-en-php/970447237/
+
+Base 64 Nodejs
+https://stackabuse.com/encoding-and-decoding-base64-strings-in-node-js/
