@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+		 
+		<meta name="description" content="CRUD PHP con API-Rest NodeJS 2ºDAW">
+		<meta name="author" content="Jorge López">
+
+		<link rel="shortcut icon" href="imagenes/icon.png"/>
+
+		<title>PHP Api-Rest</title>
+
+		<!-- estilo general de la página -->
+		<link href="ficheros/estilo_pagina.css" rel="stylesheet">
+
+		<!-- estilo barra de menú -->
+		<link href="ficheros/barra_menu.css" rel="stylesheet">		
+		
+		<!-- estilo de formularios -->
+		<link href="ficheros/formularios.css" rel="stylesheet">
+		
+		<!-- estilo de tablas -->
+		<link href="ficheros/tablas.css" rel="stylesheet"
+		>
+		<!-- biblioteca de iconos -->
+		<link href="ficheros/all.css" rel="stylesheet">		
+		
+		<!-- librería jQuery -->
+		<script src="ficheros/jquery-3.3.1.js"></script>
+</head>
+
+<!-- ***************************************************************-->
+<!-- este código se ejecuta antes de cargar la página -->
+<!-- ***************************************************************-->
+<script type="text/javascript">
+//**********************************************************************************
+//**********************************************************************************
+
+//************************************* inicio ****************************************
+// se ejecuta cuando la página web está cargada
+function inicio()
+{
+}
+//**********************************************************************************
+// función que carga la página solicitada en el div "cajapagina" 
+// cargamos las páginas de forma **"asíncrona"**
+
+//"objeto" es un parámetro opcional y si existe, pasaremos el foco de ejecución a dicho objeto
+function cargo_pagina(paginaweb,objeto)
+{
+		// pongo visible la estrella (algo que tengo que hacer antes)
+		document.getElementById('estrella').style.visibility='visible';
+		// jQuery
+		//$("#estrella").css("visibility","visible");
+		
+		// cargo la página con una llamada **"asíncrona"** (fetch) y un "callback"
+		fetch(paginaweb)
+		.then(function(datos) {return datos.text();})
+		.then(function(html)
+		{ 	
+			// cargo la página
+			document.getElementById("cajapagina").innerHTML = html;
+			// oculto la estrella (algo que tengo que hacer después)
+			document.getElementById('estrella').style.visibility='hidden';
+			// paso foco al objeto del parámetro
+			if (objeto!=null) {document.getElementById(objeto).focus();};
+			
+			// si la página web que estoy cargando es la de alta, establezco la fecha inicial en el date
+			//if (paginaweb=="formulario-alta.php") {document.getElementById(objeto).focus()fecha_hoy2();}
+		})
+		// si se produce algún error lo visualizo por consola	
+		.catch((error) => {console.log(error);});
+}
+//**********************************************************************************
+//**********************************************************************************
+// esta función la utilizo para pre-visualizar la imagen de usuario que selecciono
+function visualizo(objeto,pongo)
+{
+	var seleccionArchivos =document.getElementById(objeto);
+	var archivos=seleccionArchivos.files;
+	var imagenPrevisualizacion = document.getElementById(pongo);
+
+    if (!archivos.length)
+    {
+		imagenPrevisualizacion.src="imagenes/usuario.png";
+		return;
+    }
+
+    // ahora tomamos el primer archivo, el cual vamos a previsualizar
+    var primerArchivo = archivos[0];
+    // lo convertimos a un objeto de tipo objectURL
+    var objectURL = URL.createObjectURL(primerArchivo);
+    // y a la fuente de la imagen le ponemos el objectURL
+    imagenPrevisualizacion.src = objectURL; 
+}    
+//**********************************************************************************
+//**********************************************************************************
+// para quitar la imagen del usuario si necesito quitarla
+function borroimagen(objeto)
+{
+	 document.getElementById(objeto).src="imagenes/usuario.png";
+}
+//**********************************************************************************
+//**********************************************************************************
+function borro_div()
+{
+	// de esta forma se borra el contenido de un Div
+	document.getElementById("div_mensaje").innerHTML ="";
+}
+//**********************************************************************************
+//**********************************************************************************
+function pasofoco(objeto)
+{
+	document.getElementById(objeto).focus();
+	document.getElementById(objeto).select();
+}
+//**********************************************************************************
+//**********************************************************************************
+function pongofecha()
+{
+	var date = new Date();
+	var day = date.getDate();
+	var month = date.getMonth() + 1;
+	var year = date.getFullYear();
+	if (month < 10) month = "0" + month;
+	if (day < 10) day = "0" + day;
+	var hoy = year + "-" + month + "-" + day;       
+	document.getElementById('fecha').value=hoy;
+}
+//**********************************************************************************
+//**********************************************************************************
+
+
+//**********************************************************************************
+//**********************************************************************************
+//**********************************************************************************
+// API-REST
+//	POST: ALTA -> 1 Registro
+//**********************************************************************************
+//**********************************************************************************
+//**********************************************************************************
+
+function alta_API()
+{
+		// visualizo estrella
+	document.getElementById('estrella').style.visibility='visible';
+	
+	// des-habilito botón->alta_API
+	document.getElementById('boton2').disabled=true;	
+	
+	// a "new FormData" se le tiene que pasar el formulario con el que estemos trabajando
+	// Crea el objeto FormData, el cual obtiene los datos del formulario.
+	// de esta forma extraemos los datos del formulario
+	var formData = new FormData(document.getElementById("formulario1"));	
+
+	// llamo a "PHP-alta.php" de forma asíncrona que realizará el alta de un cliente
+
+	$.ajax({
+		url: "PHP-Alta.php",
+		type: "POST",
+		dataType: "json",
+		data: formData,
+		cache: false,
+		contentType: false,
+		processData: false
+	}).done(function(datos)
+	{
+			// esta función es el callback
+			// y en el parámetro "datos" tendré toda la información que me devuelva el script php (si devolviese...)
+			// oculto estrella
+			$("#estrella").css("visibility","hidden");
+			// habilito botón alta
+			document.getElementById('boton2').disabled=false;			
+			// paso el foco a NOMBRE
+			pasofoco('nombre');			
+			if (datos.estado=='true')
+			// se ha dado de alta
+			{
+				document.getElementById('div_mensaje').innerHTML="Registro dado de alta";
+				// limpio cajas formulario
+				document.getElementById("formulario1").reset();
+				// limpio imagen usuario
+				borroimagen('img1');						
+				// llamo a limpiar div con un retardo de 4 seg
+				setTimeout("borro_div()",4000);				
+			}
+			else
+			// no se ha dado de alta
+			{
+				document.getElementById('div_mensaje').innerHTML="Error: ha ocurrido un problema";
+			}
+			});
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//**********************************************************************************
+// API-REST
+//	GET: CONSULTA -> 1 Registro
+//**********************************************************************************
+//**********************************************************************************
+//**********************************************************************************
+
+// el 2ºparámetro de esta función->es por si la llamo desde borrar y tengo que habilitar el botón de borrar
+function consulta_API(laid,habilito_borrar)
+{
+	// visualizo estrella
+	document.getElementById('estrella').style.visibility='visible';
+	
+	// des-habilito caja texto "id"
+	document.getElementById('id').disabled=true;
+	
+	// des-habilito botón->consulta_API
+	document.getElementById('boton2').disabled=true;	
+	
+	// borro contenido div_mensaje
+	document.getElementById('div_mensaje').innerHTML="";
+
+	// en este caso utilizamos el método jQuery -> $.post
+	$.post("PHP-Consulta.php", {id_cliente:laid}, function(datos)
+	{
+			if (datos.length>0)
+			{
+				document.getElementById('img1').src="data:image/jpeg;base64,"+datos[0].imagen;
+
+				document.getElementById('nombre').value=" "+datos[0].nombre;
+				document.getElementById('provincia').value=" "+datos[0].provincia;
+				document.getElementById('edad').value=" "+datos[0].edad;
+				
+				// formato de fecha español
+				document.getElementById('fecha').value=" "+
+				datos[0].fecha.substr(8,2)+"-"+datos[0].fecha.substr(5,2)+"-"+datos[0].fecha.substr(0,4);	
+
+				// habilito botón de borrar -> si tengo que habilitarlo
+				if (habilito_borrar==1)
+				{
+					document.getElementById('boton3').disabled=false;
+					// y aprovecho para des-habilitar botón de consulta
+					document.getElementById('boton2').disabled=true;
+				}
+			}
+			else
+			{
+				document.getElementById('div_mensaje').innerHTML="id: "+laid+" registro no encontrado"
+				document.getElementById('id').disabled=false;
+				document.getElementById('boton2').disabled=false;
+				pasofoco('id');			
+			}
+			
+			document.getElementById('estrella').style.visibility='hidden';
+			
+	});	
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//**********************************************************************************
+// API-REST
+//	DELETE: BORRAR -> 1 Registro
+//**********************************************************************************
+//**********************************************************************************
+//**********************************************************************************
+
+function borrar_API(laid)
+{
+	// visualizo estrella
+	document.getElementById('estrella').style.visibility='visible';
+
+	$.ajax({
+		url: "PHP-Baja.php?el_id="+laid,
+		type: "GET", // podríamos poner "DELETE" y mira el script php "PHP-Baja.php"
+		dataType: "json",
+	}).done(function(datos)
+			{
+				if (datos.estado=='true')
+				// se ha borrado
+				{
+					document.getElementById('id').disabled=false;
+					borroimagen('img1');
+					document.getElementById('div_mensaje').innerHTML='Id: '+laid+' Registro borrado con éxito';
+					document.getElementById("formulario1").reset();
+					document.getElementById('boton2').disabled=false;	
+					document.getElementById('boton3').disabled=true;	
+					document.getElementById('id').focus();		
+					// llamo a limpiar div con un retardo de 4 seg
+					setTimeout("borro_div()",4000);								
+				}
+				else
+				// no se ha borrado
+				{
+					// es raro que ocurra esto -> pero alguien se ha podido adelantar
+					document.getElementById('div_mensaje').innerHTML='El Cliente con Id: '+laid+" no se ha encontrado";
+					pasofoco('id');				
+				}
+				document.getElementById('estrella').style.visibility='hidden';
+			});
+}
+
+//**********************************************************************************
+//**********************************************************************************
+//**********************************************************************************
+// API-REST
+//	GET: LISTADO -> Todos los Registros
+//**********************************************************************************
+//**********************************************************************************
+//**********************************************************************************
+
+function listado_API(elcriterio)
+{
+
+	// visualizo estrella
+	document.getElementById('estrella').style.visibility='visible';
+	
+	// des-habilito botón->consulta
+	document.getElementById('boton1').disabled=true;	
+	
+	// borro contenido caja de texto
+	document.getElementById('info').value="";
+
+	// en este caso utilizamos el método jQuery -> $.post
+	$.post("PHP-Listado.php", {el_criterio: elcriterio}, function(datos)
+	{
+			if (datos.length>0)
+			{
+				// si ya existiera una tabla anterior la borro
+				document.getElementById('pongotabla').innerHTML="";
+
+				// oculto estrella
+				document.getElementById('estrella').style.visibility='hidden';
+				
+				// en "datos" tengo el array que devuelve "PHP-Listado.php" en formato JSON
+				var lista = datos;
+				
+				// creo una tabla
+				var jQueryTabla = $("<table class='table' style='border:0px solid red;'></table>");
+				// asigno ID a la tabla
+				jQueryTabla.attr({id:"latabla"});
+				// introduzco la tabla en su contenedor
+				$("#pongotabla").append(jQueryTabla);
+				
+				// **********cabecera TABLA************************
+				var cabecera=
+				"<caption>"+"<p line-height:10px><b>Datos de los Clientes:</b></p></caption>"+	
+				"<thead>"+
+				"<tr>"+
+				"<th>Id:</th>"+
+				"<th>Nombre:</th>"+
+				"<th>Provincia:</th>"+
+				"<th>Edad:</th>"+
+				"<th>Fecha:</th>"+
+				"<th>Imagen:</th>"+
+				"</tr>"+
+				"</thead>";
+				jQueryTabla.append(cabecera);
+				// **********cabecera TABLA************************
+
+				// ************cuerpo TABLA************************
+
+				lista.forEach(elemento =>
+				{
+						var fila=
+						"<tbody>"+
+						"<tr>"+
+						"<td>"+elemento.id+"</td>"+
+						"<td>"+elemento.nombre+"</td>"+
+						"<td>"+elemento.provincia+"</td>"+
+						"<td>"+elemento.edad+"</td>"+
+						"<td>"+
+						elemento.fecha.substr(8,2)+"-"+elemento.fecha.substr(5,2)+"-"+elemento.fecha.substr(0,4)+"</td>"+
+						"<td>"+
+						"<img "+
+						"style='width:45px;height:45px;border:1px solid black;' src='data:image/jpeg;base64,"+elemento.imagen+"'></td>"+
+						"</tr>"+
+						"</tbody>";
+						jQueryTabla.append(fila);      
+				});
+				
+				document.getElementById('info').value=lista.length+" Clientes recuperados";
+			}
+			else
+			{
+				document.getElementById('info').value="No hay registros!!";
+			}
+			
+			document.getElementById('boton1').disabled=false;
+			document.getElementById('estrella').style.visibility='hidden';
+			
+	});	
+}
+</script>
+
+<body onload="">
+<!-- **************************** CABECERA ************************************************ -->
+<!-- **************************** CABECERA ************************************************ -->
+<!-- **************************** CABECERA ************************************************ -->
+<header>
+
+<div class="BarraNavegar">
+		<!-- título de la barra -->
+		<div class="Opcion_menu">
+				<i class="fas fa-users fa-2x"></i>
+				<label class="titulo" >Gestión Clientes&nbsp </label>	
+				<label  class="L1"><b>API-Rest-2 NodeJs</b></label>		
+		</div>
+		<!-- icono -->
+		<div class="Opcion_menu Opcion_menu_icono">
+			<i class="fas fa-bars"></i>
+		</div>			
+		
+		<!-- alineados a la izquierda -->
+		<nav class="Grupo_opciones">
+					<div class="Opcion_menu" onclick="location.href = 'index1.html';">
+							<label id="0" class="label_menu"
+							onmousemove="document.getElementById('0').style.color = 'aqua';"
+							onmouseout="document.getElementById('0').style.color = 'white';"							
+							>Inicio</label>
+					</div>		
+					<div class="Opcion_menu" onclick="cargo_pagina('HTML-Alta.php','nombre');">
+							<label id="1" class="label_menu"
+							onmousemove="document.getElementById('1').style.color = 'aqua';"
+							onmouseout="document.getElementById('1').style.color = 'white';"							
+							>Alta</label>
+					</div>		
+					<div class="Opcion_menu" onclick="cargo_pagina('HTML-Consulta.php','id');">
+							<label id="2" class="label_menu"
+							onmousemove="document.getElementById('2').style.color = 'aqua';"
+							onmouseout="document.getElementById('2').style.color = 'white';"							
+							>Consulta</label>
+					</div>
+					<div class="Opcion_menu" onclick="cargo_pagina('HTML-Baja.php','id');">
+							<label id="3" class="label_menu"
+							onmousemove="document.getElementById('3').style.color = 'aqua';"
+							onmouseout="document.getElementById('3').style.color = 'white';"							
+							>Baja</label>
+					</div>
+					<div class="Opcion_menu" onclick="cargo_pagina('HTML-Listado.php');">
+							<label id="4" class="label_menu" 
+							onmousemove="document.getElementById('4').style.color = 'aqua';"
+							onmouseout="document.getElementById('4').style.color = 'white';"							
+							>Listado</label>
+					</div>
+					<div class="Opcion_menu" onclick="">
+							<label id="5" class="label_menu"
+							onmousemove="document.getElementById('5').style.color = 'aqua';"
+							onmouseout="document.getElementById('5').style.color = 'white';"							
+							>Modificación</label>
+					</div>					
+		</nav>
+		
+</div>
+</header>
+
+<!-- **************************** CUERPO ************************************************ -->
+<!-- **************************** CUERPO ************************************************ -->
+<!-- **************************** CUERPO ************************************************ -->
+
+<div id="cajapagina" class="contenedor1">
+	
+		<img id="imagenlogo" src="imagenes/clientes.png" style="cursor:pointer;max-width: 90%;"></img>
+	
+</div>
+
+<!-- **************************** FOOTER ************************************************ -->
+<!-- **************************** FOOTER ************************************************ -->
+<!-- **************************** FOOTER ************************************************ -->
+<footer class="footer">
+		<img  id="estrella" src="imagenes/estrella.gif"  height="40" width="40" style="visibility:hidden;"/>
+		&nbsp&nbsp<i class="fas fa-bolt fa-2x" ></i>
+		<label>&nbsp © 2022 Copyright</label>		
+</footer>
+
+</body>
+</html>
+
+<!-- ***************************************************************-->
+<!-- este código se ejecuta después de cargar la página -->
+<!-- ***************************************************************-->
+<script type="text/javascript">
+//**********************************************************************************
+// función asociada al "click" del menú pequeñito de barras  
+function visualizo_opciones()
+{
+	// navs->es un array compuesto por todos los elementos pertenecientes a la clase "'.Grupo_opciones"
+	// este array tendrá 2 elementos
+	const navs = document.querySelectorAll('.Grupo_opciones');
+	const navs2 = document.querySelectorAll('.Grupo_opciones_derecha');
+	//alert(navs.length);
+	//alert(navs2.length);
+	
+	// con el método ".forEach" me recorro el array y a cada elemento del array le asocio la clase ".visualizo"
+	navs.forEach(nav => {nav.classList.toggle('visualizo');});
+	navs2.forEach(nav => {nav.classList.toggle('visualizo');});
+}
+
+
+
+//**********************************************************************************
+// código
+//**********************************************************************************
+// asocio la función "visualizo_opciones()" al evento "click" sobre el menú de barra para móviles
+document.querySelector('.Opcion_menu_icono').addEventListener('click', visualizo_opciones);
+</script>
+
+
+

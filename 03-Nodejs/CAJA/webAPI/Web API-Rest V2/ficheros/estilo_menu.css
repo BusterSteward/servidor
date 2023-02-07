@@ -1,0 +1,150 @@
+body
+{
+	  display: flex;
+	  flex-direction: column;
+	  margin: 0;
+	  min-height: 100vh;
+}
+
+.Navbar
+{
+	/* alinear elementos horozontalmente */
+	display: flex;
+	background-color: DodgerBlue;
+	/* márgenes interiores de la barra de navegación */
+	padding: 10px;
+	font-family: calibri;
+	font-size: 20px;
+	color: white;	
+	/*font-weight: bold;*/
+}
+
+.Navbar_Items
+{
+	/* eje vertical - y */
+	align-items: center;
+	display:flex;
+}
+
+.Navbar_Link
+{
+	/* espacio a la derecha entre opciones de menú */
+	padding-right: 30px;
+}
+
+.Navbar_Items_right
+{
+	/* alinea estas opciones de menú a la derecha */
+	margin-left:auto;
+}
+
+/* botón de menú con pantalla pequeña*/
+.Navbar_Link_toggle
+{
+	display: none;
+}
+
+.contenedor
+{
+	border-style: solid;
+	border-width: 2px;
+	border-color: green;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	flex: 1;
+	/* eje horizontal - x */
+	justify-content: center;
+	display: flex;
+}
+
+.contenedor2
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color: red;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	flex: 1;
+	/* eje horizontal - x */
+	justify-content: center;
+	/* eje vertical - y */
+	align-items: center;	
+	display: flex;
+	margin: 25px;
+}
+
+.contenedor3
+{
+	border-style: solid;
+	border-width: 0px;
+	border-color: black;
+	/* eje horizontal - x */
+	justify-content: center;
+	/* eje vertical - y */
+	align-items: center;	
+	display: flex;
+}
+
+
+.label
+{
+	cursor:pointer;
+}
+
+.footer
+{
+	display: flex;
+	/* factor de contracción */
+	/* flex-shrink:0; */
+	background-color: DodgerBlue;
+	/* border-width: 1px; */
+	/* border-color: blue; */
+	height: 60px;
+	/* eje vertical - y */
+	align-items: center;
+	/* eje horizontal - x */
+	justify-content: center;	
+	color: white;
+	font-size: 16px;
+	font-family: sans-serif;
+}
+
+
+@media only screen and (max-width: 768px)
+{
+		.Navbar_Items,
+		.Navbar,.contenedor3
+		{
+			flex-direction: column;
+		}
+		.Navbar_Items
+		{
+			display:none;
+		}
+		.Navbar_Items_right
+		{
+			margin-left:0;
+		}
+		.Navbar_Link_toggle
+		{
+			/* anula el align-items */
+			align-self: flex-end;
+			display: initial;
+			position: absolute;
+			cursor: pointer;
+		}	  
+		/* una vez el botón se visualice, las opciones de menú se visualizarán así */
+		.Navbar_ToggleShow
+		{
+			display: flex;
+		}	
+		.Navbar_Link
+		{
+			/* para que no salgan pegados */
+			margin-top:10px;
+		}	
+		.contenedor2
+		{
+			flex-direction: column;
+		}
+		
+		
+}

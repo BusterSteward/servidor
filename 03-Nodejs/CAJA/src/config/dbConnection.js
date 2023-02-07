@@ -9,6 +9,6 @@ module.exports = () =>
 		host: 'localhost',
 		user: 'jorge',
 		password: '666666',
-		database: 'API_nodejs_V1'
+		database: 'API_nodejs_V2'
   });
 }

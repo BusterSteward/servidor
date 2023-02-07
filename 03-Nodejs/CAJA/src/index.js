@@ -1,11 +1,5 @@
 //************************************************************************
-// API Rest VERSIÓN v1.0
-//************************************************************************
-//
-// Documentación MÉTODOS http:
-// https://diego.com.es/metodos-http
-// https://es.wikibooks.org/wiki/M%C3%A9todos_HTTP
-//
+// API Rest VERSIÓN v2.0
 //************************************************************************
 
 // importamos librería
@@ -18,7 +12,7 @@ app.use(express.json());
 
 // ***** Routes *****
 // le decimos donde están las rutas de nuestra aplicación
-app.use(require('./routes/empleados'));
+app.use(require('./routes/clientes'));
 
 // PUERTO por el que escucho
 app.set('port', process.env.PORT || 3000);

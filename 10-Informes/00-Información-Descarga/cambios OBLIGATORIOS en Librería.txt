@@ -1,0 +1,12 @@
+Fichero: Cpdf.php
+
+87 public $tempPath = '/tmp';
+por
+87 public $tempPath = 'C:\xampp\tmp';
+
+
+435  $this->fontPath = dirname(__FILE__).'/fonts';
+por
+435 $this->fontPath = 'fonts';
+
+
