@@ -1,0 +1,46 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+<body onload="document.getElementById('articulo').focus();">
+	<%- include('02-HEADER-2'); %> 
+
+	<div class="contenedor1">
+	<div id="cajapagina" class="contenedor2">
+			<div class="contenedor-formulario">
+				<form action="/subir" id="formulario1" name="formulario1" method="post" enctype="multipart/form-data">
+				<legend class="leyenda">Subir Ficheros a: <%= lacarpeta %></legend><br>
+				<div id="mensaje" class="div_mensaje" style="width:100%;height:35px;"> <%= mensaje %> </div><br>
+				<input class="boton3" id="objetofile1" name="objetofile1" type="file" multiple style="CURSOR:pointer;" onchange="cambio_boton()"/><br>								
+						
+				<button class="boton" id="boton1" type="reset" onclick="reset_boton()">
+				<i class="fa fa-trash"></i> Limpiar
+				</button>
+
+				<button class="boton" id="boton2" type="submit" disabled>
+				<i class="fa fa-home"></i> Subir
+				</button>					
+				
+				<button class="boton" id="boton3" type="button"
+				onclick="location.href=('/');">
+				<i class="fas fa-window-close"></i> Cancelar
+				</button><br><br>
+			</div>
+	</div>
+	</div>
+	<%- include('03-FOOTER'); %> 
+</body>
+</html>					
+
+
+<script type="text/javascript">
+	function cambio_boton()
+	{
+		document.getElementById('boton2').disabled=false;
+	}
+
+function reset_boton()
+	{
+		document.getElementById('boton2').disabled=true;
+		document.getElementById('mensaje').innerHTML="";		
+	}
+</script>

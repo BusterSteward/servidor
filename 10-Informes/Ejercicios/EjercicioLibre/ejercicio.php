@@ -67,6 +67,9 @@ $INIT_RYT=755;
 $INIT_RXP=400;
 $INIT_RYP=400;
 
+$INIT_RXTA=500;
+$INIT_RYTA=665;
+
 //coordenadas RECTÁNGULOS
 $rx=$INIT_RX;
 $ry=$INIT_RY;
@@ -79,8 +82,12 @@ $ryi=$INIT_RYI;
 $rxt=$INIT_RXT;
 $ryt=$INIT_RYT;
 
+//coordenadas de algo
 $rxp=$INIT_RXP;
 $ryp=$INIT_RYP;
+
+//coordenadas de tabla
+$ryta=$INIT_RYTA;
 //****************************************************
 $TAM_LETRA=11;
 $INTERLINEADO=20;
@@ -181,7 +188,10 @@ while ($total_impresos<=$numRegistros)
 		$pdf->addText(($rxt+$offset*5)-5,$ryt,$TAM_LETRA,$fila['FECHA']);
 		$pdf->addText(($rxt+$offset*6),$ryt-$INTERLINEADO*4.2,$TAM_LETRA*1.75,$fila['PRECIO']." €");
         
-        $data=array(
+
+		$pdf->ezSetCmMargins(1,1,5.5,1.5);
+		$data=[];
+        $data[]=array(
             'T37'=>$fila["T37"],
             'T38'=>$fila["T38"],
             'T39'=>$fila["T39"],
@@ -194,53 +204,80 @@ while ($total_impresos<=$numRegistros)
             'T46'=>$fila["T46"],
             'T47'=>$fila["T47"],
             'T48'=>$fila["T48"],
-            'PARES'=>$fila["UNIDADES"]
+            'PARES'=>$fila["UNIDADES"],
+			'background_color' => array(0.9,0.9,0.5)
+        );
+        $data[]=array(
+            'T37'=>"04",
+            'T38'=>"05",
+            'T39'=>"06",
+            'T40'=>"07",
+            'T41'=>"08",
+            'T42'=>"09",
+            'T43'=>"10",
+            'T44'=>"11",
+            'T45'=>"12",
+            'T46'=>"13",
+            'T47'=>"14",
+            'T48'=>"15",
+            'PARES'=>"PARES",
+			'background_color' => array(0.9, 0.9, 0.7)
         );
 
         $titles = array(
-            'T37'=>'T37',
-            'T38'=>'T38',
-            'T39'=>'T39',
-            'T40'=>'T40',
-            'T41'=>'T41',
-            'T42'=>'T42',
-            'T43'=>'T43',
-            'T44'=>'T44',
-            'T45'=>'T45',
-            'T46'=>'T46',
-            'T47'=>'T47',
-            'T48'=>'T48',
+            'T37'=>'37',
+            'T38'=>'38',
+            'T39'=>'39',
+            'T40'=>'40',
+            'T41'=>'41',
+            'T42'=>'42',
+            'T43'=>'43',
+            'T44'=>'44',
+            'T45'=>'45',
+            'T46'=>'46',
+            'T47'=>'47',
+            'T48'=>'48',
             'PARES'=>'PARES');
 
         $options = array(
-            'fontSize' => 10,
+            'fontSize' => 7,
             'showHeadings' => 1,
+			//'line'=> 1,
             'shaded' => 1,
-            'gridlines' => 2, // modifica este número
+            'gridlines' => 31, // modifica este número
             'xOrientation'=> 'center',
             'innerLineThickness' => 0.5,
-            'outerLineThickness' => 3,
-            'width'=>320,
+			'outerLineThickness' => 0.5,
+            'width'=>200,
             'cols'=>array(
-                'T37'=>array('width'=>20,'justification'=>'center'),
-                'T38'=>array('width'=>20,'justification'=>'center'),
-                'T39'=>array('width'=>20,'justification'=>'center'),
-                'T40'=>array('width'=>20,'justification'=>'center'),
-                'T41'=>array('width'=>20,'justification'=>'center'),
-                'T42'=>array('width'=>20,'justification'=>'center'),
-                'T43'=>array('width'=>20,'justification'=>'center'),
-                'T44'=>array('width'=>20,'justification'=>'center'),
-                'T45'=>array('width'=>20,'justification'=>'center'),
-                'T46'=>array('width'=>20,'justification'=>'center'),
-                'T47'=>array('width'=>20,'justification'=>'center'),
-                'T48'=>array('width'=>20,'justification'=>'center'),
-                'PARES'=>array('width'=>20,'justification'=>'center'))
+                'T37'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7],"border"=>1),
+                'T38'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]),
+                'T39'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]),
+                'T40'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]),
+                'T41'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]),
+                'T42'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]),
+                'T43'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]),
+                'T44'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]),
+                'T45'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]),
+                'T46'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]),
+                'T47'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]),
+                'T48'=>array('width'=>25,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]),
+                'PARES'=>array('width'=>34,'justification'=>'center','bgcolor'=>[0.9, 0.9, 0.7]))
             ); 
 
-        $pdf->ezSetY(730);
+
+        $pdf->ezSetY($ryta);
         //$pdf->ezSetX(730);
-		
+		foreach ($data as &$row) {
+			$row['background_color_cell'] = sprintf(
+				'background-color: rgb(%d, %d, %d);',
+				$row['background_color'][0] * 255,
+				$row['background_color'][1] * 255,
+				$row['background_color'][2] * 255
+			);
+		}
         $pdf->ezTable($data,$titles, '', $options);
+		$pdf->ezSetCmMargins(1,1,1.5,1.5);
 		/*
 		$pdf->ezText("TITULO: ".$fila['TITULO'],10);
 		$pdf->ezText("AUTOR: ".$fila['AUTOR'],10);
@@ -274,6 +311,7 @@ while ($total_impresos<=$numRegistros)
 			$ryt=$ryt-190;
 			$ryi=$ryi-190;
             $ryp=$ryp-190;
+			$ryta=$ryta-190;
 		
 		$nRegistros++;
 		
@@ -294,6 +332,7 @@ while ($total_impresos<=$numRegistros)
 			$rxt=$INIT_RXT;
 			$ryt=$INIT_RYT;
             $ryp=$INIT_RYP;
+			$ryta=$INIT_RYTA;
 			//actualizar libros impresos
 			$nRegistros=1;
 		}

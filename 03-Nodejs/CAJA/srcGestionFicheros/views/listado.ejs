@@ -1,0 +1,35 @@
+<title><%= titulo %></title>
+<%- include('01-HEAD'); %> 
+
+<body>
+	<%- include('02-HEADER-3'); %> 
+	<div class="contenedor1">
+			<div id="cajapagina" class="contenedor2">
+					<!-- recibimos una variable llamada "datos"-->
+					<table class='table' style='border:0px solid red'>
+
+							<thead><tr>
+							<th>Selección</th>
+							<th>Imagen</th>
+							<th>Nombre</th>
+							<th>Tamaño</th>
+							</tr></thead>
+
+							<tr><td><b>Carpeta:</b></td> <td colspan="3" style="color:brown"><b><%= lacarpeta %> (<%=datos.length%> ficheros) </b></td></tr>
+					   
+							<tbody>
+							<% for (var i = 0; i < datos.length; i ++) { %>
+								<tr>
+								<td><input type='checkbox' id='marca' name='marca' value='<%= datos[i].name %>' style='cursor:pointer'></td>
+								<td><img src='<%= lacarpeta %>/<%= datos[i].name %>' width="50" height="50" border="1"></td>
+								<td><%= datos[i].name %></td>
+								<td><%= datos[i].size %> Bytes</td>
+								</tr>
+								<% } %>
+							</tbody>
+					</table>
+	</div>
+	</div>
+<%- include('03-FOOTER'); %> 
+</body>
+</html>

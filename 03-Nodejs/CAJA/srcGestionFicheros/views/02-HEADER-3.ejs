@@ -1,0 +1,46 @@
+<header>
+<div class="BarraNavegar">
+		<!-- título de la barra -->
+		<div class="Opcion_menu">
+				<i class="fas fa-users fa-2x"></i>
+				<label class="titulo" >Listar Ficheros Usuario&nbsp</label>	
+		</div>
+		<!-- icono -->
+		<div class="Opcion_menu Opcion_menu_icono">
+			<i class="fas fa-bars"></i>
+		</div>			
+		
+		<!-- alineados a la derecha -->
+		<nav class="Grupo_opciones Grupo_opciones_derecha">
+					<div class="Opcion_menu" onclick="location.href=('/');">
+							<label id="10" class="label_menu"
+							onmousemove="document.getElementById('10').style.color = 'aqua';"
+							onmouseout="document.getElementById('10').style.color = 'white';"
+							>Volver</label>
+					</div>
+		</nav>		
+</div>
+</header>
+
+<!-- ***************************************************************-->
+<!-- este código se ejecuta después de cargar la vista -->
+<!-- ***************************************************************-->
+<script type="text/javascript">
+		//**********************************************************************************
+		// función asociada al "click" del menú pequeñito de barras  
+		function visualizo_opciones()
+		{
+			// navs->es un array compuesto por todos los elementos pertenecientes a la clase "'.Grupo_opciones"
+			// este array tendrá 2 elementos
+			const navs2 = document.querySelectorAll('.Grupo_opciones_derecha');
+			//alert(navs2.length);
+			
+			// con el método ".forEach" me recorro el array y a cada elemento del array le asocio la clase ".visualizo"
+			navs2.forEach(nav => {nav.classList.toggle('visualizo');});
+		}
+		//***********************************************************************************
+		// código
+		//***********************************************************************************
+		// asocio la función "visualizo_opciones()" al evento "click" sobre el menú de barra para móviles
+		document.querySelector('.Opcion_menu_icono').addEventListener('click', visualizo_opciones);
+</script>
