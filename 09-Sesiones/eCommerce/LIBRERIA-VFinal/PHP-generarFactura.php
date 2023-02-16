@@ -63,8 +63,8 @@ $INIT_RY=640;
 $INIT_RXI=55;
 $INIT_RYI=606;
 
-$INIT_RXT=54;
-$INIT_RYT=740;
+$INIT_RXT=285;
+$INIT_RYT=810;
 
 
 //coordenadas RECTÁNGULOS
@@ -84,8 +84,9 @@ $desY=-105;
 
 //****************************************************
 //variables para el control del texto
-$TAM_LETRA=11;
-$INTERLINEADO=20;
+$TAM_LETRA_PEQUEÑA=8;
+$TAM_LETRA_GRANDE=20;
+$INTERLINEADO=10;
 
 //variable de control del espacio entre diferentes textos
 $offset=42;
@@ -94,6 +95,7 @@ $offset=42;
 
 //****************************************************
 $totalfactura=0;
+$totalRegistros=count($_SESSION["ID"]);
 //  con esta variable ($npagina) controlo el nº de páginas ejemplo que imprimo en el pdf 
 foreach($_SESSION["ID"] as $id){
 
@@ -101,7 +103,13 @@ foreach($_SESSION["ID"] as $id){
             $ry-=40;
             $ryi-=40;
             $ryt-=40;
+			$pdf->addText($rxt,$ryt,$TAM_LETRA_PEQUEÑA,'Datos: ');
             $datosFactura=false;
+			$pdf->addText($rxt-200,$ryt-$INTERLINEADO,$TAM_LETRA_PEQUEÑA,"FECHA: ".$fechaActual);
+			$pdf->addText($rxt-200,$ryt-$INTERLINEADO*2,$TAM_LETRA_PEQUEÑA,"IDENTIFICADOR DE PEDIDO: ".rand(10000,99999));
+			$pdf->addText($rxt-200,$ryt-$INTERLINEADO*3,$TAM_LETRA_PEQUEÑA,"FECHA DE ENTREGA PREVISTA: ".date("d/m/y",strtotime($fechaActual."+ 2 day")));
+
+			
         }
 		if ($cabecera)
 		{
@@ -117,10 +125,16 @@ foreach($_SESSION["ID"] as $id){
 				$pdf->addText(180,790,17,'Catálogo de RELOJES.');
                 $pdf->addText(370,790,12,'Impreso:');
                 $pdf->setColor(0,0,1);
-                $pdf->addText(420,790,12,$fechaActual);
 				$pdf->setStrokeColor(179/255, 68/255, 27/255);
 				$pdf->line(30,785,550,785);
 				$pdf->ezText("\n",10);
+				$pdf->setColor(0,0.9,0.75);
+				$pdf->filledRectangle ($rx,$ry+105,500,15,array(0,0.9,0.75));
+				$pdf->setStrokeColor(0,0,0);
+				$pdf->rectangle($rx,$ry+105,200,15);
+				$pdf->rectangle($rx+200,$ry+105,100,15);
+				$pdf->rectangle($rx+300,$ry+105,100,15);
+				$pdf->rectangle($rx+400,$ry+105,100,15);
 				$cabecera=false;
 		}
 		
@@ -129,20 +143,32 @@ foreach($_SESSION["ID"] as $id){
         //$pdf->addJpegFromFile('imagen1.jpg', $rxi,$ryi+10,110,110);
         
 		
-	
 		
-		$pdf->setStrokeColor(0,0,1);
+		
+		$pdf->setStrokeColor(0,0,0);
 		$pdf->setLineStyle(1,'round'); 
 		$pdf->setColor(0,0.7,0.75);
 		//******* imprimimos cuadros****************		
-		$pdf->filledRectangle ($rx,$ry,300,100,array(0,0.7,0.75));
+		$pdf->filledRectangle ($rx,$ry,500,100,array(0,0.7,0.75));
+		$pdf->rectangle($rx,$ry,200,100);
+		$pdf->rectangle($rx+200,$ry,100,100);
+		$pdf->rectangle($rx+300,$ry,100,100);
+		$pdf->rectangle($rx+400,$ry,100,100);
         $pdf->setColor(0,0,1);
         $pdf->setStrokeColor(0,0,0);
 		$pdf->setLineStyle(1,'round'); 
-
         //$pdf->rectangle ($rxi,$ryi,122,130);
         //$pdf->rectangle ($rxi,$ryi-85,120,75);
         
+		if($nRegistros==$totalRegistros){
+
+			$pdf->setStrokeColor(0,0,0);
+			$pdf->setLineStyle(1,'round');
+			$pdf->setColor(1,1,0);
+			$pdf->filledRectangle($rx+200,$ry-20,300,15);
+			$pdf->rectangle($rx+200,$ry-20,200,15);
+			$pdf->rectangle($rx+400,$ry-20,100,15);
+		}
 		
 		
 		//******* imprimimos texto****************
@@ -154,7 +180,7 @@ foreach($_SESSION["ID"] as $id){
 		$pdf->addText($rxt,$ryt-$INTERLINEADO*7.25,$TAM_LETRA,$fila["DESCRIPCION"]);
 		$pdf->setColor(1,0,0);
 		$pdf->addText($rxt,$ryt-$INTERLINEADO*9.5,$TAM_LETRA+6,$fila["PRECIO"]. " €");
-
+		
 		$stock=$fila["UNIDADES"];
 		if($stock>0){
 			$pdf->addJpegFromFile("stock1.jpg",$rxt+$offset*1.75,$ryt-$INTERLINEADO*9.7,45,45);
@@ -185,7 +211,7 @@ foreach($_SESSION["ID"] as $id){
 		$pdf->addText(($rxt+$offset*5)-5,$ryt,$TAM_LETRA,$fila['FECHA']);
 		$pdf->addText(($rxt+$offset*6),$ryt-$INTERLINEADO*4.2,$TAM_LETRA+6,$fila['PRECIO']." €");
         */
-
+		
 		/*
 		$pdf->ezText("TITULO: ".$fila['TITULO'],10);
 		$pdf->ezText("AUTOR: ".$fila['AUTOR'],10);
@@ -201,10 +227,10 @@ foreach($_SESSION["ID"] as $id){
 		// siempre utilizamos las mismas 5 imágenes en todas las páginas
 		/*
         file_put_contents("imagen1.jpg", $fila['IMAGEN']); 
-
+		
 		//tamaño original de la imagen 156x156
 		//ezImage(image,[padding],[width],[resize],[justification],[array border])
-
+		
 		$pdf->addJpegFromFile("imagen1.jpg",$rxi+$offsetDerecha,$ryi,70,85);
         */
 		//$pdf->ezText("\n",10);
@@ -212,23 +238,23 @@ foreach($_SESSION["ID"] as $id){
 		$imagenaimprimir='imagenes/'.$nlibrosimpresos.'.jpg';
 		$pdf->addJpegFromFile($imagenaimprimir,$rxi,$ryi,70,85);
 		*/
-
-
+		
+		
 		// actualizar coordenadas
 
-			
-			$ry+=$desY;
-			$ryt+=$desY;
-			$ryi+=$desY;
-			
-
+		
+		$ry+=$desY;
+		$ryt+=$desY;
+		$ryi+=$desY;
+		
+		
 		
 		$nRegistros++;
 		
 		//*************** PREGUNTO POR PÁGINA NUEVA*************
 		// si ya he imprimido 5 libros en la página -> creo página nueva
 		//*******************************************************
-		if ($nRegistros>6)
+		if ($nRegistros%6==0&&$nRegistros<=$totalRegistros)
 		{
 			//creo página nueva
 			$pdf->ezNewPage();
@@ -241,16 +267,12 @@ foreach($_SESSION["ID"] as $id){
 			$ryi=$INIT_RYI;
 			$rxt=$INIT_RXT;
 			$ryt=$INIT_RYT;
-            
 			
-			//actualizar libros impresos
-			$nRegistros=1;
 		}
 		
 }
 
     //pinto las celdas del total de factura
-
 
 
 
