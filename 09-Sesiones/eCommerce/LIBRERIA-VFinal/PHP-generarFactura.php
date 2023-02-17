@@ -11,63 +11,63 @@
 	// incluimos la librería que vamos a utilizar
 	include('libreria/Cezpdf.php');
 
+	
 	// iniciamos la session
     session_start();
 	
-
+	
 	// creamos un nuevo OBJETO para crear el pdf
 	// especificamos el tamaño del documento
 	$pdf = new Cezpdf('a4');
-
+	
 	// especificamos los bordes exteriores
 	// ezSetCmMargins(top,bottom,left,right)
 	// valores en cm
 	$pdf->ezSetCmMargins(1,1,1.5,1.5); 
-
-
+	
+	
 	//***************************************************************
 	//														TU SCRIPT
 	//***************************************************************
-
-
+	
+	
 	//****************************************************
-// es el nº de libros dentro de la página -> vamos a imprimir 5 libros por página
-$nRegistros=1;
-
-//****************************************************
-
-
-//****************************************************
-// esta variable me indicará si tengo que dibujar cabecera
-// cuando tendré que dibujar cabecera??
-// cada vez que cree una página nueva
-$cabecera=true;
-$datosFactura=true;
-//****************************************************
-
-
-//****************************************************
-// para dibujar el nº de cada una de las páginas
-$npagina=1;
-//****************************************************
-
-$fechaActual = date('d/m/y');
-//****************************************************
-// En este ejercicio lo dibujaremos todo por coordenadas
-//****************************************************
-//coordenadas iniciales
-//necesito coordenadas para el cuadro, las imagenes, el texto, la tabla y el icono
-$INIT_RX=45;
-$INIT_RY=640;
-
-$INIT_RXI=55;
-$INIT_RYI=606;
-
-$INIT_RXT=285;
-$INIT_RYT=810;
-
-
-//coordenadas RECTÁNGULOS
+	// es el nº de libros dentro de la página -> vamos a imprimir 5 libros por página
+	$nRegistros=0;
+	
+	//****************************************************
+	
+	
+	//****************************************************
+	// esta variable me indicará si tengo que dibujar cabecera
+	// cuando tendré que dibujar cabecera??
+	// cada vez que cree una página nueva
+	$cabecera=true;
+	$datosFactura=true;
+	//****************************************************
+	
+	
+	//****************************************************
+	// para dibujar el nº de cada una de las páginas
+	$npagina=1;
+	//****************************************************
+	
+	//****************************************************
+	// En este ejercicio lo dibujaremos todo por coordenadas
+	//****************************************************
+	//coordenadas iniciales
+	//necesito coordenadas para el cuadro, las imagenes, el texto, la tabla y el icono
+	$INIT_RX=45;
+	$INIT_RY=640;
+	
+	$INIT_RXI=90;
+	$INIT_RYI=645;
+	
+	$INIT_RXT=285;
+	$INIT_RYT=810;
+	
+	
+	//coordenadas RECTÁNGULOS
 $rx=$INIT_RX;
 $ry=$INIT_RY;
 
@@ -85,12 +85,17 @@ $desY=-105;
 //****************************************************
 //variables para el control del texto
 $TAM_LETRA_PEQUEÑA=8;
-$TAM_LETRA_GRANDE=20;
+$TAM_LETRA_GRANDE=14;
 $INTERLINEADO=10;
 
-//variable de control del espacio entre diferentes textos
-$offset=42;
-//****************************************************
+function calcularAlineamiento($num){
+	//$num=settype($num,'string');
+	$digitos=strlen($num);
+	
+	return $digitos*8-32;
+}
+
+
 
 
 //****************************************************
@@ -99,15 +104,24 @@ $totalRegistros=count($_SESSION["ID"]);
 //  con esta variable ($npagina) controlo el nº de páginas ejemplo que imprimo en el pdf 
 foreach($_SESSION["ID"] as $id){
 
+		$precio=number_format($_SESSION["PRECIO"][$id],2,".","");
+		$unidades=$_SESSION["CANTIDAD"][$id];
+		$subTotal=number_format($precio*$unidades,2,".","");
+		$totalfactura+=$subTotal;
         if($datosFactura){
             $ry-=40;
             $ryi-=40;
             $ryt-=40;
 			$pdf->addText($rxt,$ryt,$TAM_LETRA_PEQUEÑA,'Datos: ');
             $datosFactura=false;
-			$pdf->addText($rxt-200,$ryt-$INTERLINEADO,$TAM_LETRA_PEQUEÑA,"FECHA: ".$fechaActual);
-			$pdf->addText($rxt-200,$ryt-$INTERLINEADO*2,$TAM_LETRA_PEQUEÑA,"IDENTIFICADOR DE PEDIDO: ".rand(10000,99999));
-			$pdf->addText($rxt-200,$ryt-$INTERLINEADO*3,$TAM_LETRA_PEQUEÑA,"FECHA DE ENTREGA PREVISTA: ".date("d/m/y",strtotime($fechaActual."+ 2 day")));
+			$fechaActual = date('Y-m-d');
+			$pdf->addText($rxt-180,$ryt-$INTERLINEADO,$TAM_LETRA_PEQUEÑA,"FECHA DEL PEDIDO: ");
+			$pdf->addText($rxt+70,$ryt-$INTERLINEADO,$TAM_LETRA_PEQUEÑA,$fechaActual);
+			//$pdf->addText($rxt-180,$ryt-$INTERLINEADO*2,$TAM_LETRA_PEQUEÑA,"IDENTIFICADOR DE PEDIDO: ");
+			//$pdf->addText($rxt+80,$ryt-$INTERLINEADO*2,$TAM_LETRA_PEQUEÑA,rand(10000,99999));
+			$fechaNueva = date('Y-m-d',strtotime($fechaActual.' + 2 days'));
+			$pdf->addText($rxt-180,$ryt-$INTERLINEADO*3,$TAM_LETRA_PEQUEÑA,"FECHA DE ENTREGA PREVISTA: ");
+			$pdf->addText($rxt+70,$ryt-$INTERLINEADO*3,$TAM_LETRA_PEQUEÑA,$fechaNueva);
 
 			
         }
@@ -120,27 +134,29 @@ foreach($_SESSION["ID"] as $id){
 				
 				$pdf->selectFont('fonts/Helvetica');
                 /*$pdf->selectFont('fonts/C39HrP24DhTt');*/
-				//$pdf->addJpegFromFile("logoReloj.jpg",30,790,142,41);
+				$pdf->addJpegFromFile("./imagenes/Logo.jpg",30,790,142,41);
 				$pdf->setColor(0,0,0);
-				$pdf->addText(180,790,17,'Catálogo de RELOJES.');
-                $pdf->addText(370,790,12,'Impreso:');
+				$pdf->addText(200,790,17,'Factura de pedido.   ID:'.rand(10000,99999));
                 $pdf->setColor(0,0,1);
-				$pdf->setStrokeColor(179/255, 68/255, 27/255);
+				$pdf->setStrokeColor(0,0.9,0.75);
 				$pdf->line(30,785,550,785);
 				$pdf->ezText("\n",10);
 				$pdf->setColor(0,0.9,0.75);
 				$pdf->filledRectangle ($rx,$ry+105,500,15,array(0,0.9,0.75));
 				$pdf->setStrokeColor(0,0,0);
+				$pdf->setColor(0,0,0);
 				$pdf->rectangle($rx,$ry+105,200,15);
+				$pdf->addText($rx+50,$ry+107.5,$TAM_LETRA_GRANDE,"PRODUCTO");
 				$pdf->rectangle($rx+200,$ry+105,100,15);
+				$pdf->addText($rx+225,$ry+107.5,$TAM_LETRA_GRANDE,"PRECIO");
 				$pdf->rectangle($rx+300,$ry+105,100,15);
+				$pdf->addText($rx+315,$ry+107.5,$TAM_LETRA_GRANDE,"UNIDADES");
 				$pdf->rectangle($rx+400,$ry+105,100,15);
+				$pdf->addText($rx+415,$ry+107.5,$TAM_LETRA_GRANDE,"SUBTOTAL");
 				$cabecera=false;
 		}
 		
 		
-		//file_put_contents("imagen1.jpg", $_SESSION['IMAGEN'][$id]); 
-        //$pdf->addJpegFromFile('imagen1.jpg', $rxi,$ryi+10,110,110);
         
 		
 		
@@ -159,15 +175,33 @@ foreach($_SESSION["ID"] as $id){
 		$pdf->setLineStyle(1,'round'); 
         //$pdf->rectangle ($rxi,$ryi,122,130);
         //$pdf->rectangle ($rxi,$ryi-85,120,75);
-        
-		if($nRegistros==$totalRegistros){
+		file_put_contents("imagen1.jpg", base64_decode($_SESSION['IMAGEN'][$id])); 
+		$pdf->addJpegFromFile('imagen1.jpg', $rxi,$ryi,100,90);
+        $pdf->setColor(0,0,0);
+		$alineamiento=calcularAlineamiento($precio);
+		$pdf->addText($rxi+190-$alineamiento,$ryi+42,$TAM_LETRA_GRANDE,$precio." € ");
+		$pdf->addText($rxi+300,$ryi+42,$TAM_LETRA_GRANDE,$unidades);
+		$alineamiento=calcularAlineamiento($subTotal);
+		$pdf->addText($rxi+395-$alineamiento,$ryi+42,$TAM_LETRA_GRANDE,$subTotal." € ");
+		
 
+		//$pdf->addText($rxi+308,$ryi+42,$TAM_LETRA_GRANDE,$unidades);
+		
+        
+		if($nRegistros==$totalRegistros-1){
+			
 			$pdf->setStrokeColor(0,0,0);
 			$pdf->setLineStyle(1,'round');
 			$pdf->setColor(1,1,0);
 			$pdf->filledRectangle($rx+200,$ry-20,300,15);
+			$pdf->setColor(0,0,0);
 			$pdf->rectangle($rx+200,$ry-20,200,15);
+			$pdf->addText($rx+240,$ry-17.5,$TAM_LETRA_GRANDE,"TOTAL A PAGAR");
 			$pdf->rectangle($rx+400,$ry-20,100,15);
+			$totalfactura=number_format($totalfactura,2,".","");
+			$alineamiento=calcularAlineamiento($totalfactura);
+			$pdf->addText($rxi+395-$alineamiento,$ry-17.5,$TAM_LETRA_GRANDE,$totalfactura." € ");
+
 		}
 		
 		
@@ -254,7 +288,7 @@ foreach($_SESSION["ID"] as $id){
 		//*************** PREGUNTO POR PÁGINA NUEVA*************
 		// si ya he imprimido 5 libros en la página -> creo página nueva
 		//*******************************************************
-		if ($nRegistros%6==0&&$nRegistros<=$totalRegistros)
+		if ($nRegistros%6==0&&$nRegistros<=$totalRegistros-1)
 		{
 			//creo página nueva
 			$pdf->ezNewPage();
