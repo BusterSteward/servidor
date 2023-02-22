@@ -252,6 +252,63 @@ function consulta_API(laid,habilito_borrar)
 			
 	});	
 }
+function habilitoTodo(){
+	document.getElementById("id").disabled=true;
+	document.getElementById('boton4').disabled=false;
+	document.getElementById("nombre").disabled=false;
+	document.getElementById("provincia").disabled=false;
+	document.getElementById("edad").disabled=false;
+	document.getElementById("imagenNueva").disabled=false;
+	document.getElementById("fecha").disabled=false;
+}
+function consulta_API2()
+{
+	formulario1.removeEventListener("submit",consulta_API2);
+	formulario1.addEventListener("submit",modificacion);
+	let laid = document.getElementById("id").value;
+	// visualizo estrella
+	document.getElementById('estrella').style.visibility='visible';
+	
+	// des-habilito caja texto "id"
+	document.getElementById('id').disabled=true;
+	
+	// des-habilito botón->consulta_API
+	document.getElementById('boton2').disabled=true;	
+	
+	// borro contenido div_mensaje
+	document.getElementById('div_mensaje').innerHTML="";
+
+	// en este caso utilizamos el método jQuery -> $.post
+	$.post("PHP-Consulta.php", {id_cliente:laid}, function(datos)
+	{
+			if (datos.length>0)
+			{
+				document.getElementById('img1').src="data:image/jpeg;base64,"+datos[0].imagen;
+
+				document.getElementById('nombre').value=" "+datos[0].nombre;
+				document.getElementById('provincia').value=" "+datos[0].provincia;
+				document.getElementById('edad').value=" "+datos[0].edad;
+				
+				// formato de fecha español
+				document.getElementById('fecha').value=" "+
+				datos[0].fecha.substr(8,2)+"-"+datos[0].fecha.substr(5,2)+"-"+datos[0].fecha.substr(0,4);	
+
+				// habilito campos del formulario para modificar
+				habilitoTodo();
+				
+			}
+			else
+			{
+				document.getElementById('div_mensaje').innerHTML="id: "+laid+" registro no encontrado"
+				document.getElementById('id').disabled=false;
+				document.getElementById('boton2').disabled=false;
+				pasofoco('id');			
+			}
+			
+			document.getElementById('estrella').style.visibility='hidden';
+			
+	});	
+}
 
 //**********************************************************************************
 //**********************************************************************************
@@ -388,6 +445,52 @@ function listado_API(elcriterio)
 			
 	});	
 }
+function modificacion(){
+	console.log("estoy modificando tu cara");
+	// visualizo estrella
+	document.getElementById('estrella').style.visibility='visible';
+	
+	// des-habilito caja texto "id"
+	document.getElementById('id').disabled=true;
+	
+	// des-habilito botón->consulta_API
+	document.getElementById('boton2').disabled=true;	
+	document.getElementById('boton4').disabled=true;	
+	
+	// borro contenido div_mensaje
+	document.getElementById('div_mensaje').innerHTML="";
+
+	// en este caso utilizamos el método jQuery -> $.post
+	$.post("PHP-Modificacion.php", {id_cliente:laid}, function(datos)
+	{
+			if (datos.length>0)
+			{
+				document.getElementById('img1').src="data:image/jpeg;base64,"+datos[0].imagen;
+
+				document.getElementById('nombre').value=" "+datos[0].nombre;
+				document.getElementById('provincia').value=" "+datos[0].provincia;
+				document.getElementById('edad').value=" "+datos[0].edad;
+				
+				// formato de fecha español
+				document.getElementById('fecha').value=" "+
+				datos[0].fecha.substr(8,2)+"-"+datos[0].fecha.substr(5,2)+"-"+datos[0].fecha.substr(0,4);	
+
+				// habilito campos del formulario para modificar
+				habilitoTodo();
+				
+			}
+			else
+			{
+				document.getElementById('div_mensaje').innerHTML="id: "+laid+" registro no encontrado"
+				document.getElementById('id').disabled=false;
+				document.getElementById('boton2').disabled=false;
+				pasofoco('id');			
+			}
+			
+			document.getElementById('estrella').style.visibility='hidden';
+			
+	});
+}
 </script>
 
 <body onload="">
@@ -440,7 +543,7 @@ function listado_API(elcriterio)
 							onmouseout="document.getElementById('4').style.color = 'white';"							
 							>Listado</label>
 					</div>
-					<div class="Opcion_menu" onclick="">
+					<div class="Opcion_menu" onclick="cargo_pagina('HTML-Modificacion.php');">
 							<label id="5" class="label_menu"
 							onmousemove="document.getElementById('5').style.color = 'aqua';"
 							onmouseout="document.getElementById('5').style.color = 'white';"							

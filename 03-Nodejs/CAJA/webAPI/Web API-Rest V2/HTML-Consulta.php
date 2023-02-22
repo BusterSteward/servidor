@@ -3,7 +3,7 @@ usleep(300000);
 ?>
 
 <div class="contenedor-formulario">
-				<form id="formulario1" name "formulario1" action="" method="post" autocomplete="off" 
+				<form id="formulario1" name="formulario1" action="" method="post" autocomplete="off" 
 				enctype="multipart/form-data"
 				onsubmit="consulta_API(document.getElementById('id').value,0);return false;">	 		
 			

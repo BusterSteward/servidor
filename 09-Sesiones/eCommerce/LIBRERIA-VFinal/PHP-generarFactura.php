@@ -324,5 +324,5 @@ foreach($_SESSION["ID"] as $id){
 	fwrite ($fichero, $pdf);
 	fclose ($fichero);
 	
-	//unlink('imagen1.jpg');
+	unlink('imagen1.jpg');
 ?>

@@ -1,0 +1,214 @@
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+/*************************** MONITOR  GRANDE ***********************************/
+body
+{
+	  display: flex;
+	  flex-direction: column;
+	  margin: 0;
+	  min-height: 100vh;
+}
+
+.contenedor1
+{
+	display: flex;
+	flex-direction: row;
+	border-style: solid;
+	border-width: 2px;
+	border-color: navy;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	flex: 1;
+	/* eje horizontal - x */
+	justify-content: center;
+}
+
+.contenedor2
+{
+	display: flex;
+	  /* comportamiento de bloque */
+	flex-direction: column;	
+	border-style: solid;
+	border-width: 2px;
+	border-color: blue;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	/* sólo estamos aplicando "flex-grow" */
+	/*flex: 1;*/
+	/* eje horizontal - x */
+	justify-content: flex-start;
+	/* eje vertical - y */
+	align-items: center;	
+	margin: 15px;
+	padding:15px;
+	
+	width:35%;
+}
+
+.contenedor3
+{
+	display: flex;
+	  /* comportamiento de bloque */
+	flex-direction: column;	
+	border-style: solid;
+	border-width: 2px;
+	border-color: blue;
+	/* la capacidad de un elemento flexible para alterar sus dimensiones*/
+	/* sólo estamos aplicando "flex-grow" */
+	/*flex: 1;*/
+	/* eje horizontal - x */
+	justify-content: flex-start;
+	/* eje vertical - y */
+	align-items: center;	
+	margin: 15px;
+	padding:15px;
+	
+	width:65%;
+}
+
+.contenedor4
+{
+	display: flex;
+	flex-direction: column;	
+	border-style: solid;
+	border-width: 1px;
+	border-color: orange;
+
+	padding-top:20px;
+	padding-bottom:10px;
+	
+	width:100%;
+	font-family: sans-serif;
+}
+
+.contenedor5
+{
+	display: flex;
+	flex-direction: column;	
+	border-style: solid;
+	border-width: 1px;
+	border-color: orange;
+	
+	box-sizing: border-box;
+	padding-left:15px;
+	padding-top:10px;
+	
+	height:100%;
+	min-height:310px;
+	width:100%;
+	font-family: sans-serif;
+}
+
+.contenedor6
+{
+	display: flex;
+	flex-direction: row;	
+	border-style: solid;
+	border-width: 1px;
+	border-color: orange;
+
+	margin-top:10px;
+	padding-top:20px;
+	min-height:100px;
+	width:100%;
+	font-family: sans-serif;
+}
+
+.label2
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color: blue;
+	width:55%;
+	font-family: sans-serif;	
+	color:blue;
+	margin-left:105px;
+	padding:5px;
+	margin-top:0px;
+	margin-bottom:5px;
+}
+
+.label3
+{
+	border-style: solid;
+	border-width: 1px;
+	border-color: blue;
+	font-family: sans-serif;	
+	font-weight: bold;
+	color:red;
+	height:17px;
+	width:17px;
+	margin-left:0px;
+	margin-right:5px;
+	padding:5px;
+	margin-top:52px;
+	margin-bottom:5px;
+	text-align:center;
+}
+
+.footer
+{
+	display: flex;
+	/* factor de contracción */
+	/* flex-shrink:0; */
+	background-color: DodgerBlue;
+	/* border-width: 1px; */
+	/* border-color: blue; */
+	height: 60px;
+	/* eje vertical - y */
+	align-items: center;
+	/* eje horizontal - x */
+	justify-content: center;	
+	color: white;
+	font-size: 16px;
+	font-family: sans-serif;
+}
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+/**************************** TAMAÑO TABLET ************************************/
+@media (max-width: 1000px)
+{
+.label2
+{
+	margin-left:10px;
+	width:80%;
+}
+
+.contenedor4
+{
+	height:65%;
+}	
+
+}
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+/**************************** TAMAÑO MÓVIL ************************************/
+@media only screen and (max-width: 780px)
+{
+.contenedor1
+{
+	flex-direction: column;
+		align-items: center;
+	
+}
+
+.contenedor2,.contenedor3
+{
+	width:85%;
+	padding-top:10px;
+	margin-bottom:10px;
+
+}
+
+.contenedor4
+{
+	width:90%;
+}
+
+.contenedor
+{
+	min-height:20%;
+}
+
+}
