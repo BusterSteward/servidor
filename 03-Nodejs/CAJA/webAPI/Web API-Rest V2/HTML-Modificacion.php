@@ -5,7 +5,7 @@ usleep(300000);
 <div class="contenedor-formulario">
 				<form id="formulario1" name="formulario1" action="" method="post" autocomplete="off" 
 				enctype="multipart/form-data"
-				onsubmit="consultaAPI2();return false;">	 		
+				onsubmit="return false;">	 		
 			
 			<legend class="leyenda">Modificación de Cliente: </legend><br>
 			
@@ -74,5 +74,8 @@ usleep(300000);
     <i class="fas fa-window-close"></i> Cancelar
 			</button>										
 </form>
+<script>
+	formulario1.addEventListener("submit",consulta_API2);
+</script>
 
 </div>

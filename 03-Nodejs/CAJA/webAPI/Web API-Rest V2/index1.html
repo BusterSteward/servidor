@@ -446,6 +446,7 @@ function listado_API(elcriterio)
 	});	
 }
 function modificacion(){
+	let formData=new FormData(document.getElementById("formulario1"));
 	console.log("estoy modificando tu cara");
 	// visualizo estrella
 	document.getElementById('estrella').style.visibility='visible';
@@ -461,33 +462,19 @@ function modificacion(){
 	document.getElementById('div_mensaje').innerHTML="";
 
 	// en este caso utilizamos el método jQuery -> $.post
-	$.post("PHP-Modificacion.php", {id_cliente:laid}, function(datos)
-	{
-			if (datos.length>0)
-			{
-				document.getElementById('img1').src="data:image/jpeg;base64,"+datos[0].imagen;
-
-				document.getElementById('nombre').value=" "+datos[0].nombre;
-				document.getElementById('provincia').value=" "+datos[0].provincia;
-				document.getElementById('edad').value=" "+datos[0].edad;
-				
-				// formato de fecha español
-				document.getElementById('fecha').value=" "+
-				datos[0].fecha.substr(8,2)+"-"+datos[0].fecha.substr(5,2)+"-"+datos[0].fecha.substr(0,4);	
-
-				// habilito campos del formulario para modificar
-				habilitoTodo();
-				
-			}
-			else
-			{
-				document.getElementById('div_mensaje').innerHTML="id: "+laid+" registro no encontrado"
-				document.getElementById('id').disabled=false;
-				document.getElementById('boton2').disabled=false;
-				pasofoco('id');			
-			}
+	$.ajax({url: "PHP-Modificacion.php",
+			type: "POST",
+			dataType: "json",
+			data: formData,
+			cache: false,
+			contentType: false,
+			processData: false})
+		.done( function(datos)
+		{
+			console.log("se ha updateado el registro")
 			
-			document.getElementById('estrella').style.visibility='hidden';
+			
+		document.getElementById('estrella').style.visibility='hidden';
 			
 	});
 }
