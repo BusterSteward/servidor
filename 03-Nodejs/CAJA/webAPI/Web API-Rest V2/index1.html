@@ -68,6 +68,9 @@ function cargo_pagina(paginaweb,objeto)
 			
 			// si la página web que estoy cargando es la de alta, establezco la fecha inicial en el date
 			//if (paginaweb=="formulario-alta.php") {document.getElementById(objeto).focus()fecha_hoy2();}
+			if(paginaweb=="HTML-Modificacion.php"){
+				document.getElementById("formulario1").addEventListener("submit",consulta_API2);
+			}
 		})
 		// si se produce algún error lo visualizo por consola	
 		.catch((error) => {console.log(error);});
@@ -263,6 +266,7 @@ function habilitoTodo(){
 }
 function consulta_API2()
 {
+	
 	formulario1.removeEventListener("submit",consulta_API2);
 	formulario1.addEventListener("submit",modificacion);
 	let laid = document.getElementById("id").value;
@@ -277,10 +281,11 @@ function consulta_API2()
 	
 	// borro contenido div_mensaje
 	document.getElementById('div_mensaje').innerHTML="";
-
+	
 	// en este caso utilizamos el método jQuery -> $.post
 	$.post("PHP-Consulta.php", {id_cliente:laid}, function(datos)
 	{
+		alert("he respondido");
 			if (datos.length>0)
 			{
 				document.getElementById('img1').src="data:image/jpeg;base64,"+datos[0].imagen;
@@ -446,6 +451,8 @@ function listado_API(elcriterio)
 	});	
 }
 function modificacion(){
+	alert("modificando");
+	/*
 	let formData=new FormData(document.getElementById("formulario1"));
 	console.log("estoy modificando tu cara");
 	// visualizo estrella
@@ -477,6 +484,7 @@ function modificacion(){
 		document.getElementById('estrella').style.visibility='hidden';
 			
 	});
+	*/
 }
 </script>
 

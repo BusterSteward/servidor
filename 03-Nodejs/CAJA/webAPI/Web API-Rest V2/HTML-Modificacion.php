@@ -46,18 +46,20 @@ usleep(300000);
             
 			<button class="boton" id="boton1" type="reset" form="formulario1"
 			onclick="document.getElementById('id').disabled=false;
-						    document.getElementById('boton2').disabled=false;
-						    borroimagen('img1');
-						    document.getElementById('div_mensaje').innerHTML='';
-						    document.getElementById('id').focus();
-                            document.getElementById('boton4').disabled=true;
-                            document.getElementById('nombre').disabled=true;
-                            document.getElementById('provincia').disabled=true;
-                            document.getElementById('edad').disabled=true;
-                            document.getElementById('imagenNueva').disabled=true;
-                            document.getElementById('fecha').disabled=true;
-                            formulario1.removeEventListener('submit',modificacion);
-                            formulario1.addEventListener('submit',consulta_API2)">
+					document.getElementById('boton2').disabled=false;
+					borroimagen('img1');
+					document.getElementById('div_mensaje').innerHTML='';
+					document.getElementById('id').focus();
+					document.getElementById('boton4').disabled=true;
+					document.getElementById('nombre').disabled=true;
+					document.getElementById('provincia').disabled=true;
+					document.getElementById('edad').disabled=true;
+					document.getElementById('imagenNueva').disabled=true;
+					document.getElementById('fecha').disabled=true;
+					document.getElementById('formulario1').removeEventListener('submit',modificar);
+					document.getElementById('formulario1').addEventListener('submit',consulta_API2);";
+					>
+					
 			<i class="fa fa-trash"></i> Limpiar
         </button>
         
@@ -65,7 +67,7 @@ usleep(300000);
         onclick="">
         <i class="fa fa-home"></i> Consulta
         </button>					
-        <button class="boton" id="boton4" type="submit" form=formulario1>
+        <button class="boton" id="boton4" type="submit" disabled form=formulario1>
         <i class="fa fa-home"></i> Modificar
         </button>					
     
@@ -74,8 +76,6 @@ usleep(300000);
     <i class="fas fa-window-close"></i> Cancelar
 			</button>										
 </form>
-<script>
-	formulario1.addEventListener("submit",consulta_API2);
-</script>
+
 
 </div>
