@@ -36,7 +36,7 @@
 <script type="text/javascript">
 //**********************************************************************************
 //**********************************************************************************
-
+var imagenCambiada;
 //************************************* inicio ****************************************
 // se ejecuta cuando la página web está cargada
 function inicio()
@@ -255,6 +255,9 @@ function consulta_API(laid,habilito_borrar)
 			
 	});	
 }
+function cambioImagen(){
+	imagenCambiada=true;
+}
 function habilitoTodo(){
 	document.getElementById("id").disabled=true;
 	document.getElementById('boton4').disabled=false;
@@ -285,7 +288,7 @@ function consulta_API2()
 	// en este caso utilizamos el método jQuery -> $.post
 	$.post("PHP-Consulta.php", {id_cliente:laid}, function(datos)
 	{
-		alert("he respondido");
+		
 			if (datos.length>0)
 			{
 				document.getElementById('img1').src="data:image/jpeg;base64,"+datos[0].imagen;
@@ -301,6 +304,7 @@ function consulta_API2()
 				// habilito campos del formulario para modificar
 				habilitoTodo();
 				
+				imagenCambiada=false;
 			}
 			else
 			{
@@ -451,15 +455,16 @@ function listado_API(elcriterio)
 	});	
 }
 function modificacion(){
-	alert("modificando");
-	/*
+	
+	// des-habilito caja texto "id"
+	document.getElementById('id').disabled=false;
+	
 	let formData=new FormData(document.getElementById("formulario1"));
-	console.log("estoy modificando tu cara");
+	
+
 	// visualizo estrella
 	document.getElementById('estrella').style.visibility='visible';
 	
-	// des-habilito caja texto "id"
-	document.getElementById('id').disabled=true;
 	
 	// des-habilito botón->consulta_API
 	document.getElementById('boton2').disabled=true;	
@@ -467,24 +472,57 @@ function modificacion(){
 	
 	// borro contenido div_mensaje
 	document.getElementById('div_mensaje').innerHTML="";
+	if(!imagenCambiada){
+		formData.delete("imagenNueva");
+		console.log("hola");
 
+	}
+	console.log(formData.get("id"),
+	formData.get("nombre"),
+	formData.get("provincia"),
+	formData.get("edad"),
+	formData.get("imagenNueva")
+	);
+	
+	const boundary = '--------------------------' + Math.random().toString(16).substring(2);
 	// en este caso utilizamos el método jQuery -> $.post
+	fetch("PHP-Modificacion.php",{
+		method:"POST",
+		headers:{
+			"content-type":"multipart/form-data; boundary="+boundary
+		},
+		body:formData
+	}).then(function(resolve){
+		return resolve.text();
+	}).then(function(data){
+		console.log(data);
+	}).catch(function(err){
+		console.log(err);
+	}).finally(function(){
+		document.getElementById('estrella').style.visibility='hidden';
+
+	})
+	document.getElementById('id').disabled=true;
+
+	
+	/*
 	$.ajax({url: "PHP-Modificacion.php",
 			type: "POST",
 			dataType: "json",
 			data: formData,
-			cache: false,
 			contentType: false,
+			cache: false,
 			processData: false})
 		.done( function(datos)
 		{
-			console.log("se ha updateado el registro")
+			console.log(datos);
 			
 			
 		document.getElementById('estrella').style.visibility='hidden';
 			
 	});
 	*/
+	
 }
 </script>
 

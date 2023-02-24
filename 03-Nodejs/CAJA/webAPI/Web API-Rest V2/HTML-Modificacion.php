@@ -40,7 +40,7 @@ usleep(300000);
                 <img id="img1" src="imagenes/usuario.png" width="94" height="94" style="border:1px solid blue" >
                 
             </label>
-            <input id="imagenNueva" name="imagenNueva" disabled type="file">
+            <input id="imagenNueva" name="imagenNueva" disabled type="file" onchange="cambioImagen();visualizo('imagenNueva','img1');">
 			
 			<div class="div_mensaje" id="div_mensaje" style="width:100%;height:35px;margin-top:1em;"></div>
             
