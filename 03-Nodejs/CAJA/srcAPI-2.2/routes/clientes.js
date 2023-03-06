@@ -188,6 +188,59 @@ router.get("/listado/:criterio", async (req, res) =>
 	}	
 });  
 
+router.put('/:id',async (req, res)=>
+{
+	const { id } = req.params;
+	console.log("MODIFICACIÓN "+id);
+	var sql = "UPDATE clientes SET nombre=?, provincia=?,edad=?,fecha=?";
+
+	if(req.body.imagen==undefined){
+		user={
+			nombre: req.body.nombre,
+			provincia : req.body.provincia,
+			edad : req.body.edad,
+			fecha: req.body.fecha
+		}
+	}
+	else{
+		var auxiliar=new Buffer.from(req.body.imagen, 'base64');
+		sql+=",imagen=?";
+		user={
+			nombre: req.body.nombre,
+			provincia : req.body.provincia,
+			edad : req.body.edad,
+			fecha: req.body.fecha,
+			imagen : auxiliar
+		}
+	}
+	sql+=" WHERE id="+id;
+	
+	try{
+
+		await connection.query(sql,user, function(error, rows, fields)
+		{
+			if (error)
+			{
+			    res.json({estado: 'false'});
+				console.log('número de error: '+error.errno)
+			    console.log('MODIFICACIÓN-mensaje de error: '+error.sqlMessage)
+				
+			}
+			else
+			{
+		        // esto es lo que nos devolverá el script php "PHP-Modificacion.php"
+				res.json({estado: 'true'});
+				console.log("consulta ejecutada");
+			}
+		});
+	}
+	catch(error){
+		console.error("MODIFICACIÓN-El error producido:\n"+error.message);
+			// detenemos el servidor y mostramos error
+			process.exit();
+	}
+	
+})
 //***************************************************************************
 //***************************************************************************
 //***************************************************************************
