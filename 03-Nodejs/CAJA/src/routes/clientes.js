@@ -125,6 +125,51 @@ router.get('/:id', async (req, res) =>
 			process.exit();
 	}	
 });  
+/********************MODIFICACION********************************************************/ 
+router.put('/:id', async (req, res) =>
+{
+	var datos;
+	const { id } = req.params;  
+	var sql="UPDATE CLIENTES WHERE id ="+[id];
+	console.log("me ha llegado la peticion");
+/*
+	try
+	{
+		await connection.query(sql,function(error, datos, fields)
+			{
+				if (error)
+				{
+					 //throw error;
+					 console.log('número de error: '+error.errno)
+					 console.log('CONSULTA-mensaje de error: '+error.sqlMessage)
+				}
+				else
+				{
+					console.log("consulta ejecutada");
+					if (datos.length>0)
+					{	
+						console.log("Los datos devueltos son:\n",datos);
+						var laimagen=datos[0].imagen.toString('base64');
+						datos[0].imagen=laimagen;
+						
+						res.json(datos);
+					}
+					else
+					{
+						console.log("Cliente NO encontrado",id);
+						res.json({estado: 'false'});
+					}
+				}
+			});	
+	}
+	catch (error)
+	{
+			console.error("CONSULTA-El error producido GET 1 Registro:\n"+error.message);
+			// detenemos el servidor y mostramos error
+			process.exit();
+	}	
+	*/
+});  
 
 //***************************************************************************
 //***************************************************************************

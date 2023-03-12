@@ -477,15 +477,18 @@ function modificacion(){
 		console.log("hola");
 
 	}
-	console.log(formData.get("id"),
+	console.log(
+	formData.get("id"),
 	formData.get("nombre"),
 	formData.get("provincia"),
 	formData.get("edad"),
+	
 	formData.get("imagenNueva")
 	);
-	
+	/*
 	const boundary = '--------------------------' + Math.random().toString(16).substring(2);
 	// en este caso utilizamos el método jQuery -> $.post
+	
 	fetch("PHP-Modificacion.php",{
 		method:"POST",
 		headers:{
@@ -504,8 +507,8 @@ function modificacion(){
 	})
 	document.getElementById('id').disabled=true;
 
+	*/
 	
-	/*
 	$.ajax({url: "PHP-Modificacion.php",
 			type: "POST",
 			dataType: "json",
@@ -521,7 +524,7 @@ function modificacion(){
 		document.getElementById('estrella').style.visibility='hidden';
 			
 	});
-	*/
+	
 	
 }
 </script>

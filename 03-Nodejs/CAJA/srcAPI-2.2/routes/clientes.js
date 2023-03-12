@@ -87,7 +87,7 @@ router.get('/:id', async (req, res) =>
 {
 	var datos;
 	const { id } = req.params;  
-	var sql="SELECT * FROM clientes WHERE id ="+[id]
+	var sql="SELECT * FROM clientes WHERE id ="+[id];
 
 	try
 	{
