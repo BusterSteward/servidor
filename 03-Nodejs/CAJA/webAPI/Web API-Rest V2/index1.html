@@ -468,7 +468,7 @@ function modificacion(){
 	
 	// des-habilito botón->consulta_API
 	document.getElementById('boton2').disabled=true;	
-	document.getElementById('boton4').disabled=true;	
+	//document.getElementById('boton4').disabled=true;	
 	
 	// borro contenido div_mensaje
 	document.getElementById('div_mensaje').innerHTML="";
@@ -518,12 +518,17 @@ function modificacion(){
 			processData: false})
 		.done( function(datos)
 		{
-			console.log(datos);
+		console.log(datos.url);
 			
 			
 		document.getElementById('estrella').style.visibility='hidden';
 			
 	});
+	
+		})
+		.fail(function(jqXHR, textStatus, errorThrown) {
+  			console.log("Error: " + errorThrown);
+		});
 	
 	
 }

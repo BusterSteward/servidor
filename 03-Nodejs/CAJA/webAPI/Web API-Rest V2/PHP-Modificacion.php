@@ -1,35 +1,59 @@
 <?php
 
-$v1="hola"
-//header("Content-type:application/json; charset = utf-8"); 
-echo $v1;
+header("Content-type:application/json; charset = utf-8"); 
 /*
-$v1=$_POST["id"];
-$v2=$_POST["nombre"];
-$v3=$_POST["provincia"];
-$v4=$_POST["edad"];
-$v5=$_POST["fecha"];
-
-
-$variables = array(
-    'nombre' => $v2,
-    'provincia' => $v3,
-    'edad'   => $v4,
-    'fecha' => $v5,
-    );
 if(isset($_FILES["imagenNueva"]["tmp_name"])){
-    $foto_reconvertida = file_get_contents($_FILES['foto1']['tmp_name']);
-    $v6=base64_encode($foto_reconvertida);
-    $variables['imagen']=$v6;
+    echo "hola";
 }
+else{
+    echo "adios";
+}*/
+$v1 = $_POST["id"];
+$v2 = strtoupper($_POST["nombre"]);
+$v3 = strtoupper($_POST["provincia"]);
+$v4 = strtoupper($_POST["edad"]);
+$v5 = $_POST["fecha"];
+
 /*
-// codificamos a formato "json" los valores
-$datos = json_encode($variables);
-	
+$variables=[];
+$variables['nombre']=$v1;
+$variables['provincia']=$v2;
+$variables['edad']=$v3;
+$variables['fecha']=$v4;
+*/
+$variables;
+
+if(isset($_FILES['imagenNueva'])){
+    $foto_reconvertida = file_get_contents($_FILES['imagenNueva']['tmp_name']);
+    $v6=base64_encode($foto_reconvertida);
+    $variables=array(
+        'nombre'=>$v2,
+        'provincia'=>$v3,
+        'edad'=>$v4,
+        'fecha'=>$v5,
+        'imagenNueva'=>$v6
+    );
+    //echo 1;
+    
+}
+else{
+    $variables=array(
+        'nombre'=>$v1,
+        'provincia'=>$v2,
+        'edad'=>$v3,
+        'fecha'=>$v4,
+    );
+    
+    //echo 2;
+}
+$datos=json_encode($variables);
+
 $url ='http://127.0.0.1:3000/'.$v1;
+
 
 // configuro conexión
 $conexion = curl_init();
+
 curl_setopt($conexion, CURLOPT_URL, $url);
 
 //especificamos el método POST
@@ -45,18 +69,19 @@ curl_setopt($conexion, CURLOPT_HTTPHEADER, array('Content-Type: application/json
 
 
 //ejecutamos conexión y recogemos la respuesta
-curl_exec ($conexion);
+$respuesta = curl_exec ($conexion);
 
 //o el error, por si falla
 //$error = curl_error($ch);
 
 //y finalmente cerramos curl
 curl_close ($conexion);
-echo "hola";
-/*
+
 // si todo va bien y se realiza el alta -> la respuesta de la API será:
 // res.json({estado: 'true'});
-echo $respuesta;*/
+echo $respuesta;
+
+/*$string=$variables["nombre"]." ".$variables["provincia"]." ".$variables["edad"]." ".$variables["fecha"];*/
 
 
 
