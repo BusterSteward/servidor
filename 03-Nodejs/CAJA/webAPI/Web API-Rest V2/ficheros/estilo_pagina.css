@@ -10,6 +10,7 @@ body
 	  min-height: 100vh;
 }
 
+
 /* este contenedor1 es hijo de un contenedor padre flex */
 /* por tanto podemos aplicar propiedades flex->hijos */
 /* nunca propiedades flex->padre porque no es padre */

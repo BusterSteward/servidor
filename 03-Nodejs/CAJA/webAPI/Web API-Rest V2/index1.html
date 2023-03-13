@@ -299,7 +299,7 @@ function consulta_API2()
 				
 				// formato de fecha español
 				document.getElementById('fecha').value=" "+
-				datos[0].fecha.substr(8,2)+"-"+datos[0].fecha.substr(5,2)+"-"+datos[0].fecha.substr(0,4);	
+				datos[0].fecha.substr(0,4)+"-"+datos[0].fecha.substr(5,2)+"-"+datos[0].fecha.substr(8,2);	
 
 				// habilito campos del formulario para modificar
 				habilitoTodo();
@@ -518,9 +518,13 @@ function modificacion(){
 			processData: false})
 		.done( function(datos)
 		{
-		console.log(datos.url);
-			
-			
+		if(datos.estado==true){
+			document.getElementById('div_mensaje').innerHTML="El cliente se ha modificado correctamente";
+	
+		}
+		else{
+			document.getElementById('div_mensaje').innerHTML="Ha ocurrido un error y el cliente no se ha modificado";
+		}
 		document.getElementById('estrella').style.visibility='hidden';
 			
 	})
@@ -529,6 +533,22 @@ function modificacion(){
 		});
 	
 	
+}
+function limpiar(){
+	document.getElementById('id').disabled=false;
+	document.getElementById('boton2').disabled=false;
+	borroimagen('img1');
+	document.getElementById('div_mensaje').innerHTML='';
+	document.getElementById('id').focus();
+	document.getElementById('boton4').disabled=true;
+	document.getElementById('nombre').disabled=true;
+	document.getElementById('provincia').disabled=true;
+	document.getElementById('edad').disabled=true;
+	document.getElementById('imagenNueva').disabled=true;
+	document.getElementById('fecha').disabled=true;
+	
+	document.getElementById('formulario1').removeEventListener('submit',modificacion);
+	document.getElementById('formulario1').addEventListener('submit',consulta_API2);
 }
 </script>
 

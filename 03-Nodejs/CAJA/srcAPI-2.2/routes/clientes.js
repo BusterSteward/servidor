@@ -192,31 +192,31 @@ router.put('/:id',async (req, res)=>
 {
 	const { id } = req.params;
 	console.log("MODIFICACIÓN "+id);
-	var sql = "UPDATE clientes SET nombre=?, provincia=?,edad=?,fecha=?";
+	var sql = "UPDATE clientes SET ? WHERE id="+id;
 
-	if(req.body.imagen==undefined){
+	if(req.body.imagenNueva==undefined){
 		user={
-			nombre: req.body.nombre,
-			provincia : req.body.provincia,
-			edad : req.body.edad,
-			fecha: req.body.fecha
+			nombre: req.body.nombre.trim(),
+			provincia : req.body.provincia.trim(),
+			edad : parseInt(req.body.edad),
+			fecha: req.body.fecha.trim()
 		}
 	}
 	else{
-		var auxiliar=new Buffer.from(req.body.imagen, 'base64');
-		sql+=",imagen=?";
+		var auxiliar=new Buffer.from(req.body.imagenNueva, 'base64');
+		//sql+=",imagen=? ";
 		user={
-			nombre: req.body.nombre,
-			provincia : req.body.provincia,
-			edad : req.body.edad,
-			fecha: req.body.fecha,
+			nombre: req.body.nombre.trim(),
+			provincia : req.body.provincia.trim(),
+			edad : parseInt(req.body.edad),
+			fecha: req.body.fecha.trim(),
 			imagen : auxiliar
 		}
 	}
-	sql+=" WHERE id="+id;
+	//sql+="WHERE id="+id;
 	
 	try{
-
+		console.log(sql,user);
 		await connection.query(sql,user, function(error, rows, fields)
 		{
 			if (error)
